@@ -25,9 +25,9 @@ const FormPage = ({
             className={formStyles.divider}
             flexItem
           >
-            <Chip label={dividerText} variant="outlined" />
+            <Chip className={formStyles.chip} label={dividerText} variant="outlined" />
           </Divider>
-          <Stack>
+          <Stack className={formStyles.inputs}>
             <Center className={formStyles.image}>
               <img src={image} alt="nextjs" />
             </Center>

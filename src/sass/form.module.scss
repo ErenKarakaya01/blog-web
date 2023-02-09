@@ -6,12 +6,17 @@
   position: relative;
 
   .col {
+    right: 0;
     height: 100vh;
     margin-left: auto;
     margin-right: 4em;
 
     .divider {
       margin-right: 2.5em;
+
+      .chip {
+        width: 6em;
+      }
     }
 
     .image {
@@ -25,9 +30,15 @@
     .center {
       height: 100%;
       display: inline-flex;
+      width: 100%;
+      margin-right: 0;
 
       .form {
         width: 100%;
+      }
+
+      .inputs {
+        width: 15em;
       }
     }
   }
