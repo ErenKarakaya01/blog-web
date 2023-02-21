@@ -1,11 +1,8 @@
-import {
-  Button,
-  Group,
-  PasswordInput,
-  TextInput,
-} from "@mantine/core"
+import { Button, Group, PasswordInput, TextInput } from "@mantine/core"
 import { useForm, UseFormReturnType } from "@mantine/form"
 import formStyles from "../sass/form.module.scss"
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../firebase/firebase'
 
 interface FormValues {
   email: string
@@ -14,7 +11,6 @@ interface FormValues {
 }
 
 const RegisterForm = () => {
-
   // Handles form input formats
   const form: UseFormReturnType<FormValues> = useForm<FormValues>({
     initialValues: {
@@ -38,29 +34,17 @@ const RegisterForm = () => {
 
   // Handles post request of register
   const handleSubmit = (values: FormValues) => {
-    /* axios
-      .post("/users/register", values)
-      .then(({ data }) => {
-        if (data.isRegistered) {
-          showNotification({
-            autoClose: 5000,
-            title: "Register Success",
-            message: "Register was successful",
-            color: "green",
-          })
-          router.push("/login")
-        } else {
-          data.errors.forEach((v: string) =>
-            showNotification({
-              autoClose: 5000,
-              title: "Error",
-              message: v,
-              color: "red",
-            })
-          )
-        }
+    createUserWithEmailAndPassword(auth, values.email, values.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user
+        console.log(user)
       })
-      .catch((e: Error) => console.log(e)) */
+      .catch((error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log(errorCode, errorMessage)
+      })
   }
 
   return (
