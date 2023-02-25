@@ -2,6 +2,8 @@ import { Button, Group, PasswordInput, TextInput } from "@mantine/core"
 import { useForm, UseFormReturnType } from "@mantine/form"
 import formStyles from "../sass/form.module.scss"
 import { showNotification } from "@mantine/notifications"
+import { signInWithEmailAndPassword } from "firebase/auth"
+import { auth } from '../firebase/firebase'
 
 interface FormValues {
   email: string
@@ -9,7 +11,6 @@ interface FormValues {
 }
 
 const LoginForm = () => {
-
   // Validate text input formats
   const form: UseFormReturnType<FormValues> = useForm<FormValues>({
     initialValues: {
@@ -24,30 +25,13 @@ const LoginForm = () => {
 
   // Handles post request of login
   const handleSubmit = (values: FormValues) => {
-    /* axios
-      .post("/users/login", values)
-      .then(async ({ data }) => {
-        if (data.isLoggedIn) {
-          setIsAuth!(true)
-          const { data } = await axios.get("/users/getuser")
-
-          setUser!(data.user)
-
-          if (data.user.type === "customer") {
-            router.push("/browse")
-          } else router.push("/gallery")
-        } else {
-          data.errors.forEach((v: string) =>
-            showNotification({
-              autoClose: 5000,
-              title: "Error",
-              message: v,
-              color: "red",
-            })
-          )
-        }
+    signInWithEmailAndPassword(auth, values.email, values.password)
+      .then((userCredential) => {})
+      .catch((error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log(errorCode, errorMessage)
       })
-      .catch((e: Error) => console.log(e)) */
   }
 
   return (

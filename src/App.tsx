@@ -3,11 +3,10 @@ import Register from "./pages/register"
 import { useRoutes } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { auth } from "./firebase/firebase"
-import { onAuthStateChanged } from 'firebase/auth'
+import { onAuthStateChanged } from "firebase/auth"
+import Home from "./pages/home"
 
 const App = () => {
-
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -26,7 +25,7 @@ const App = () => {
   const element = useRoutes([
     {
       path: "/",
-      element: <div />,
+      element: <Home />,
       children: [],
     },
     { path: "login", element: <Login /> },

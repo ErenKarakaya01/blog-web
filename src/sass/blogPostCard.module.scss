@@ -1,0 +1,98 @@
+.card {
+  display: flex;
+  justify-content: flex-end;
+  height: 18rem;
+  padding: 1rem;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  width: 80%;
+  transition: height 0.5s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s;
+  }
+
+  .card__img {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #007acc;
+    text-decoration: none;
+    transition: 0.2s;
+    position: relative;
+    width: 30%;
+
+    &:hover {
+      color: #005b9f;
+      opacity: 0.8;
+    }
+
+    .card__img__overlay {
+      width: 100%;
+      position: absolute;
+      margin: auto 0;
+      left: -30%;
+
+      img {
+        width: 100%;
+        object-fit: cover;
+        aspect-ratio: 1/1;
+        border-radius: 1em;
+        background: linear-gradient(145deg, #f0f0f0, #cacaca);
+        box-shadow: 10px 10px 20px #b1b1b1, -10px -10px 20px #ffffff;
+      }
+    }
+  }
+
+  .card__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 70%;
+    padding: 1.5em 1rem;
+
+    .card__date {
+      color: #7b7992;
+      margin-bottom: 15px;
+      display: block;
+      font-weight: 500;
+    }
+
+    .card__title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0d0925;
+      margin-bottom: 20px;
+    }
+
+    .card__text {
+      color: #4e4a67;
+      margin-bottom: 30px;
+      line-height: 1.5em;
+    }
+
+    .card__btn {
+      max-width: 15rem;
+      border: 0;
+      display: inline-flex;
+      background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
+      padding: 15px 35px;
+      border-radius: 50px;
+      color: #fff;
+      box-shadow: 0px 14px 80px rgba(252, 56, 56, 0.4);
+      text-decoration: none;
+      font-weight: 500;
+      justify-content: center;
+      text-align: center;
+      letter-spacing: 1px;
+      @media screen and (max-width: 576px) {
+        width: 100%;
+      }
+    }
+  }
+}
