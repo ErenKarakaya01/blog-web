@@ -151,7 +151,7 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
       <Drawer
         style={{ width: "100%" }}
         opened={opened}
-        onClose={() => toggle()}
+        onClose={toggle}
         title="Register"
         padding="xl"
       >

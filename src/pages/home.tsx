@@ -2,10 +2,10 @@ import React from "react"
 import Navbar from "../layouts/Navbar"
 import { ScrollArea } from "@mantine/core"
 import homeStyles from "../sass/home.module.scss"
-import BlogPostCard from './../components/BlogPostCard';
+import BlogPostCard from "./../components/BlogPostCard"
+import CardsCarousel from "../components/Carousel"
 
 const Home = () => {
-
   return (
     <div>
       <Navbar
@@ -21,7 +21,12 @@ const Home = () => {
 
       <ScrollArea className={homeStyles.container}>
         <div className={homeStyles.content}>
-           <BlogPostCard />
+          <div className={homeStyles.carousel}>
+            <CardsCarousel />
+          </div>
+          <div className={homeStyles.blog__posts}>
+            <BlogPostCard />
+          </div>
         </div>
       </ScrollArea>
     </div>
