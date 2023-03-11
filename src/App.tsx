@@ -5,6 +5,9 @@ import { useEffect, useState } from "react"
 import { auth } from "./firebase/firebase"
 import { onAuthStateChanged } from "firebase/auth"
 import Home from "./pages/home"
+import Turkey from "./pages/posts"
+import PostsLayout from './layouts/PostsLayout'
+import AddPost from './pages/addPost';
 
 const App = () => {
   useEffect(() => {
@@ -26,10 +29,19 @@ const App = () => {
     {
       path: "/",
       element: <Home />,
-      children: [],
+      children: [
+      ],
+    },
+    {
+      path: "/posts",
+      element: <PostsLayout url={''} />,
+      children: [
+        { path: "turkey", element: <Turkey /> },
+      ],
     },
     { path: "login", element: <Login /> },
     { path: "register", element: <Register /> },
+    { path: "add-post", element: <AddPost /> },
     { path: "*", element: <h1>Not Found</h1> },
   ])
 

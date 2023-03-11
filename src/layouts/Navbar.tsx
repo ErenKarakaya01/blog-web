@@ -22,6 +22,7 @@ import MessageIcon from "@mui/icons-material/Message"
 import SettingsIcon from "@mui/icons-material/Settings"
 import StarIcon from "@mui/icons-material/Star"
 import DeleteIcon from "@mui/icons-material/Delete"
+import { NavLink } from "react-router-dom"
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -51,7 +52,7 @@ const useStyles = createStyles((theme) => ({
 
     div: {
       height: "100px",
-    }
+    },
   },
 
   social: {
@@ -126,24 +127,19 @@ interface HeaderMiddleProps {
 
 export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
   const [opened, { toggle }] = useDisclosure(false)
-  const [active, setActive] = useState(links[0].link)
   const { classes, cx } = useStyles()
   const [userMenuOpened, setUserMenuOpened] = useState(false)
 
   const items = links.map((link) => (
-    <a
+    <NavLink
       key={link.label}
-      href={link.link}
-      className={cx(classes.link, {
-        [classes.linkActive]: active === link.link,
+      to={link.link}
+      className={({ isActive }) => cx(classes.link, {
+        [classes.linkActive]: isActive,
       })}
-      onClick={(event) => {
-        event.preventDefault()
-        setActive(link.link)
-      }}
     >
       {link.label}
-    </a>
+    </NavLink>
   ))
 
   return (
@@ -152,7 +148,6 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
         style={{ width: "100%" }}
         opened={opened}
         onClose={toggle}
-        title="Register"
         padding="xl"
       >
         <Group className={classes.modal} spacing={5}>

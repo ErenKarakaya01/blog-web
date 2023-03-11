@@ -12,13 +12,25 @@
     "@mantine/hooks": "^5.10.3",
     "@mantine/notifications": "^5.10.3",
     "@mantine/rte": "^5.10.3",
+    "@mantine/tiptap": "^5.10.3",
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.10",
     "@reduxjs/toolkit": "^1.9.2",
-    "@tabler/icons": "^2.4.0",
+    "@tabler/icons-react": "^2.10.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@tiptap/extension-color": "^2.0.0-beta.220",
+    "@tiptap/extension-highlight": "^2.0.0-beta.220",
+    "@tiptap/extension-link": "^2.0.0-beta.220",
+    "@tiptap/extension-placeholder": "^2.0.0-beta.220",
+    "@tiptap/extension-subscript": "^2.0.0-beta.220",
+    "@tiptap/extension-superscript": "^2.0.0-beta.220",
+    "@tiptap/extension-text-align": "^2.0.0-beta.220",
+    "@tiptap/extension-text-style": "^2.0.0-beta.220",
+    "@tiptap/extension-underline": "^2.0.0-beta.220",
+    "@tiptap/react": "^2.0.0-beta.220",
+    "@tiptap/starter-kit": "^2.0.0-beta.220",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.11",
     "@types/react": "^18.0.27",
@@ -58,5 +70,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0"
   }
 }
