@@ -2,12 +2,9 @@ import React from "react"
 import Layout from "./Layout"
 import { Divider, TextInput } from "@mantine/core"
 import RichTextEditor from "@mantine/rte"
-import StyledTextEditor from '../components/StyledTextEditor'
 import PostFormLayoutStyles from "../sass/postFormLayout.module.scss"
 
 const PostFormLayout = () => {
-  
-
   return (
     <Layout>
       <div className={PostFormLayoutStyles.container}>
@@ -19,7 +16,15 @@ const PostFormLayout = () => {
 
         <Divider style={{ margin: "2em 0" }} />
 
-        <StyledTextEditor />
+        <RichTextEditor
+          className={PostFormLayoutStyles.richTextEditor}
+          onImageUpload={(image: File) => {
+            console.log(image)
+            return new Promise((resolve) => {
+              resolve("https://picsum.photos/200")
+            })
+          }}
+        />
       </div>
     </Layout>
   )
