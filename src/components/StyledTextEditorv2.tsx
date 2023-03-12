@@ -37,6 +37,9 @@ const StyledTextEditorv2 = () => {
               ["divider"],
               ["clean"],
             ],
+            handlers: {
+              image: function (value: any) {},
+            },
           },
           divider: {
             // default
@@ -65,6 +68,7 @@ const StyledTextEditorv2 = () => {
         const input = document.createElement("input")
         input.setAttribute("type", "file")
         input.setAttribute("accept", "image/*")
+        input.click()
 
         input.onchange = async () => {
           const file = input.files![0]
@@ -72,10 +76,11 @@ const StyledTextEditorv2 = () => {
           const formData = new FormData()
           formData.append("image", file)
 
-          return new Promise((resolve) => {
-            console.log(file)
-            resolve("https://picsum.photos/200")
-          })
+          const range = editor.getSelection(true)
+          editor.pasteHTML(
+            range.index + 1,
+            `<img src="https://img-s3.onedio.com/id-541084251e19448517acb112/rev-0/w-620/f-jpg/s-35a6982c8daa73402de71031952b51523044f528.jpg" >`
+          )
         }
       }
 
@@ -85,13 +90,8 @@ const StyledTextEditorv2 = () => {
         .container.querySelector(".ql-image")
 
       imageButton.addEventListener("click", async () => {
-        const url = await handleImageUpload()
+        handleImageUpload()
         editor.focus()
-        const range = editor.getSelection(true)
-        editor.pasteHTML(
-          range.index + 1,
-          `<img src=${"https://picsum.photos/200"} />`
-        )
       })
     }
   }, [])
@@ -100,10 +100,7 @@ const StyledTextEditorv2 = () => {
     <div className={PostFormLayoutStyles.richTextEditor}>
       <div ref={editorRef} style={{ height: "400px" }} />
       <TypographyStylesProvider>
-        <div
-          
-          dangerouslySetInnerHTML={{ __html: content }}
-        />
+        <div dangerouslySetInnerHTML={{ __html: content }} />
       </TypographyStylesProvider>
     </div>
   )
