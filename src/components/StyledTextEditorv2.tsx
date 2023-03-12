@@ -5,6 +5,8 @@ import "quill/dist/quill.bubble.css"
 import "quill/dist/quill.snow.css"
 import "quill-divider"
 import { TypographyStylesProvider } from "@mantine/core"
+import PostFormLayoutStyles from "../sass/postFormLayout.module.scss"
+import { RichTextEditor } from "@mantine/rte"
 
 const StyledTextEditorv2 = () => {
   const [content, setContent] = useState("")
@@ -44,7 +46,6 @@ const StyledTextEditorv2 = () => {
       })
 
       editor.on("text-change", () => {
-        console.log(editor.root.innerHTML)
         setContent(editor.root.innerHTML)
       })
 
@@ -67,6 +68,7 @@ const StyledTextEditorv2 = () => {
 
         input.onchange = async () => {
           const file = input.files![0]
+          console.log(file)
           const formData = new FormData()
           formData.append("image", file)
 
@@ -86,17 +88,22 @@ const StyledTextEditorv2 = () => {
         const url = await handleImageUpload()
         editor.focus()
         const range = editor.getSelection(true)
-        editor.insertEmbed(range.index, "", url)
-        editor.pasteHTML(range.index + 1, "<img src=" + "https://picsum.photos/200" + ">")
+        editor.pasteHTML(
+          range.index + 1,
+          `<img src=${"https://picsum.photos/200"} />`
+        )
       })
     }
   }, [])
 
   return (
-    <div>
+    <div className={PostFormLayoutStyles.richTextEditor}>
       <div ref={editorRef} style={{ height: "400px" }} />
       <TypographyStylesProvider>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div
+          
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
       </TypographyStylesProvider>
     </div>
   )
