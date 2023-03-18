@@ -7,10 +7,14 @@ import "quill-divider"
 import { TypographyStylesProvider } from "@mantine/core"
 import PostFormLayoutStyles from "../sass/postFormLayout.module.scss"
 import { RichTextEditor } from "@mantine/rte"
+import { useDispatch } from "react-redux"
+import { setContent } from "../redux/post/postSlice"
+import { useAppDispatch, useAppSelector } from "./../redux/hooks"
 
 const StyledTextEditorv2 = () => {
-  const [content, setContent] = useState("")
   const editorRef = useRef(null)
+  const dispatch = useAppDispatch()
+  const content = useAppSelector((state) => state.post.content)
 
   useEffect(() => {
     if (editorRef.current) {
@@ -33,23 +37,42 @@ const StyledTextEditorv2 = () => {
               ["image", "link", "video"],
               /* ["direction", { align: [] }], */
               [{ script: "super" }, { script: "sub" }],
-              ["blockquote", "code-block"],
+              ["blockquote" /*, "code-block" */],
               ["divider"],
               ["clean"],
             ],
             handlers: {
-              image: function (value: any) {},
+              image: (value: boolean) => {
+                const input = document.createElement("input")
+                input.setAttribute("type", "file")
+                input.setAttribute("accept", "image/*")
+                input.click()
+
+                input.onchange = async () => {
+                  const file = input.files![0]
+                  console.log(file)
+                  const formData = new FormData()
+                  formData.append("image", file)
+
+                  const range = editor.getSelection(true)
+                  editor.pasteHTML(
+                    range.index + 1,
+                    `<img src="https://picsum.photos/1900/1900" >`
+                  )
+                }
+              },
             },
           },
           divider: {
             // default
-            cssText: "border: none;border-bottom: 1px inset;",
+            cssText:
+              "border: none;border-top-width: 1px;border-top-color: #ced4da;border-top-style: solid; max-width: 98vw; margin: 2em 0px;",
           },
         },
       })
 
       editor.on("text-change", () => {
-        setContent(editor.root.innerHTML)
+        dispatch(setContent(editor.root.innerHTML))
       })
 
       editor.root.innerHTML = content
@@ -62,46 +85,20 @@ const StyledTextEditorv2 = () => {
           editor.insertText(cursorPosition, "\u00A0")
         }
       }
+    }
 
-      // custom handler to upload images
-      const handleImageUpload = async () => {
-        const input = document.createElement("input")
-        input.setAttribute("type", "file")
-        input.setAttribute("accept", "image/*")
-        input.click()
-
-        input.onchange = async () => {
-          const file = input.files![0]
-          console.log(file)
-          const formData = new FormData()
-          formData.append("image", file)
-
-          const range = editor.getSelection(true)
-          editor.pasteHTML(
-            range.index + 1,
-            `<img src="https://img-s3.onedio.com/id-541084251e19448517acb112/rev-0/w-620/f-jpg/s-35a6982c8daa73402de71031952b51523044f528.jpg" >`
-          )
-        }
-      }
-
-      // add custom handler to image upload button
-      const imageButton = editor
-        .getModule("toolbar")
-        .container.querySelector(".ql-image")
-
-      imageButton.addEventListener("click", async () => {
-        handleImageUpload()
-        editor.focus()
-      })
+    return () => {
+      editorRef.current = null
     }
   }, [])
 
   return (
-    <div className={PostFormLayoutStyles.richTextEditor}>
-      <div ref={editorRef} style={{ height: "400px" }} />
-      <TypographyStylesProvider>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-      </TypographyStylesProvider>
+    <div className={PostFormLayoutStyles.content}>
+      <div
+        className={PostFormLayoutStyles.display}
+        ref={editorRef}
+        style={{ height: "400px" }}
+      />
     </div>
   )
 }

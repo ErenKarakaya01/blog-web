@@ -1,17 +1,15 @@
-import React from "react"
+import React, { useCallback, useMemo } from "react"
 import blogPostCardStyles from "../sass/blogPostCard.module.scss"
-import { Modal, Text } from "@mantine/core"
+import { Indicator, Modal, Text, useMantineTheme } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import { useNavigate } from "react-router-dom"
-
-const date = new Date()
-const month = date.toLocaleString("default", { month: "long" })
-const day = date.toString().split(" ")[2]
-const year = date.toString().split(" ")[3]
+import useRandomColor from "../hooks/useRandomColor"
 
 const BlogPostCard = () => {
   const [opened, { toggle }] = useDisclosure(false)
   const navigate = useNavigate()
+  const getRandomColor = useRandomColor()
+  const indicatorColor = useMemo(() => getRandomColor(), [getRandomColor])
 
   return (
     <>
@@ -26,17 +24,38 @@ const BlogPostCard = () => {
       <div className={blogPostCardStyles.card}>
         <div className={blogPostCardStyles.card__img}>
           <div className={blogPostCardStyles.card__img__overlay}>
-            <img
-              src="https://random.imagecdn.app/300/150"
-              alt="img"
-              onClick={toggle}
-            />
+            <Indicator
+              label={"category"}
+              color={indicatorColor}
+              inline
+              size={16}
+              radius={8}
+              withBorder
+            >
+              <img
+                src="https://random.imagecdn.app/300/150"
+                alt="img"
+                onClick={toggle}
+              />
+            </Indicator>
           </div>
         </div>
+
         <div className={blogPostCardStyles.card__content}>
-          <div className={blogPostCardStyles.card__date}>
-            {`${day} ${month} ${year}`}
-          </div>
+          <Text
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "start",
+              color: useMantineTheme().colors.gray[6],
+              marginBottom: "0.5em",
+            }}
+            size="sm"
+            weight={500}
+          >
+            <span style={{ color: "black" }}>{"place"}</span>・
+            {new Date().toLocaleDateString()}
+          </Text>
           <Text lineClamp={1} className={blogPostCardStyles.card__title}>
             Titleasdgasdgasdgasdgsadgasdgasdgagsdg
           </Text>

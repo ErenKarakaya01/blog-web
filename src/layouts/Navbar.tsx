@@ -134,16 +134,25 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
     <NavLink
       key={link.label}
       to={link.link}
-      className={({ isActive }) => cx(classes.link, {
-        [classes.linkActive]: isActive,
-      })}
+      className={({ isActive }) =>
+        cx(classes.link, {
+          [classes.linkActive]: isActive,
+        })
+      }
     >
       {link.label}
     </NavLink>
   ))
 
   return (
-    <Header height={56}>
+    <Header
+      height={56}
+      sx={{
+        position: "sticky",
+        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
+        marginBottom: "2em",
+      }}
+    >
       <Drawer
         style={{ width: "100%" }}
         opened={opened}
