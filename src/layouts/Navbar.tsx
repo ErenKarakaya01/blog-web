@@ -150,7 +150,6 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
       sx={{
         position: "sticky",
         boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
-        marginBottom: "2em",
       }}
     >
       <Drawer

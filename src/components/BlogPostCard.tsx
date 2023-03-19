@@ -25,11 +25,11 @@ const BlogPostCard = () => {
         <div className={blogPostCardStyles.card__img}>
           <div className={blogPostCardStyles.card__img__overlay}>
             <Indicator
-              label={"category"}
+              label={"Category"}
               color={indicatorColor}
               inline
-              size={16}
-              radius={8}
+              size={20}
+              radius={9}
               withBorder
             >
               <img
@@ -57,7 +57,7 @@ const BlogPostCard = () => {
             {new Date().toLocaleDateString()}
           </Text>
           <Text lineClamp={1} className={blogPostCardStyles.card__title}>
-            Titleasdgasdgasdgasdgsadgasdgasdgagsdg
+            Title
           </Text>
 
           <div className={blogPostCardStyles.card__text__overlay}>
