@@ -5,61 +5,47 @@
   height: 100vh;
   background-color: rgba(248, 248, 248, 0.818);
 
-  .content {
-    margin: auto;
-    max-width: 960px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 3em 0;
-    border-radius: 0.5em;
-    margin-top: 0.8em;
+  .content_outline {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* position: relative; */
+    justify-content: center;
+    padding: 0.8em 0;
+    max-width: 100vw;
 
-    .left_bar {
-      position: absolute;
-      left: calc(50vw - 550px);
-      top: 5em;
+    @media screen and (max-width: 1450px) {
+      flex-direction: column;
+      align-items: center;
+
+      > div {
+        max-width: 95%;
+      }
+    }
+
+    .content {
+      max-width: 960px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 3em 0;
+      border-radius: 0.5em;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      margin: 0 1em;
 
-      .like {
-        position: relative;
-        .count {
-          position: absolute;
-          bottom: -0.5em;
-          right: -0.5em;
-          color: gray;
-        }
+      @media screen and (max-width: 1450px) {
+        max-width: 95%;
       }
-      div {
-        margin: 1em 0;
+
+      .carousel {
+        max-width: 80%;
       }
-    }
-
-    .right_bar {
-      position: absolute;
-      right: calc(38vw - 550px);
-      top: 5em;
-      max-width: 15vw;
-    }
-
-    * {
-      max-width: 96vw;
-    }
-
-    .carousel {
-      max-width: 80%;
     }
 
     .divider {
-      margin: 2em 0;
+      margin: 2em 1em;
       color: rgba(252, 252, 252, 0);
-      width: 90%;
+      max-width: 90%;
+      min-width: 80%;
       border-top-width: 1px;
       border-top-color: rgb(232, 232, 232);
       border-top-style: solid;
@@ -70,12 +56,99 @@
       display: flex;
       justify-content: center;
     }
+  }
 
-    .comments {
-      margin: 2rem 0;
+  .left_bar {
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 6em;
 
-      h2 {
-        font-size: 2.5rem;
+    @media screen and (max-width: 1450px) {
+      position: static;
+      flex-direction: row;
+      justify-content: start;
+      min-width: 95%;
+    }
+
+    .like {
+      position: relative;
+      .liked {
+        animation-name: fadeInOpacity;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-in;
+        animation-duration: 0.2s;
+
+        @keyframes fadeInOpacity {
+          0% {
+            scale: 1;
+          }
+          30% {
+            scale: 1.2;
+          }
+          100% {
+            scale: 1;
+          }
+        }
+      }
+      .count {
+        position: absolute;
+        bottom: -0.3em;
+        right: -0.3em;
+        color: gray;
+      }
+    }
+    div {
+      margin: 1em 0;
+    }
+  }
+
+  .right_outline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 300px;
+    height: min-content;
+
+    @media screen and (max-width: 1450px) {
+      flex-direction: column;
+      align-items: center;
+      max-width: max-content;
+
+      > div {
+        max-width: 95%;
+      }
+    }
+
+    .right_bar {
+      .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0.5em;
+      }
+
+      @media screen and (max-width: 1450px) {
+        max-width: 300px;
+        margin: 1em 0;
+      }
+    }
+
+    .recommended {
+      margin: 1em 0;
+      background-color: white;
+      overflow: hidden;
+      max-width: 100%;
+      padding: 1em;
+      box-sizing: border-box;
+      border-radius: 1em;
+
+      .recommended_title {
+        font-size: 1.5rem;
         margin-bottom: 1rem;
         text-align: center;
         text-transform: uppercase;
@@ -83,91 +156,51 @@
         color: #333;
       }
 
-      form {
+      .recommended_posts {
         display: flex;
-        margin-bottom: 1.5rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
 
-        label {
-          font-size: 1.2rem;
-          margin-right: 1rem;
-          color: #666;
-          font-weight: bold;
-        }
-
-        input {
-          flex-grow: 1;
-          font-size: 1.2rem;
-          padding: 0.5rem;
-          border: none;
-          background-color: #f2f2f2;
-
-          &:focus {
-            outline: none;
-            background-color: #fff;
-            box-shadow: 0 0 0 2px #007bff;
-          }
-        }
-
-        button {
-          font-size: 1.2rem;
-          padding: 0.5rem;
-          background-color: #007bff;
-          color: #fff;
-          border: none;
-          border-radius: 0.25rem;
-          cursor: pointer;
-          transition: background-color 0.2s;
+        .recommended_post {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          margin: 0.3em 0;
+          border-radius: 0.5em;
+          padding: 1em 0;
 
           &:hover {
-            background-color: #0069d9;
+            background-color: rgba(248, 248, 248, 0.818);
           }
 
-          &:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px #007bff;
-          }
-        }
-      }
+          .recommended_post_tags {
+            max-width: 100%;
+            flex-wrap: nowrap;
+            margin: 0.5em 0;
+            overflow: hidden;
+            height: min-content;
 
-      p {
-        font-size: 1.2rem;
-        color: #999;
-        text-align: center;
-        margin-top: 1rem;
-      }
+            > div {
+              max-width: 100%;
+              overflow: hidden;
+              padding-left: 0;
 
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-
-        li {
-          margin-bottom: 1rem;
-          padding: 1rem;
-          border: 1px solid #eee;
-          border-radius: 0.25rem;
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-          background-color: #fff;
-
-          &:last-child {
-            margin-bottom: 0;
+              > div {
+                text-overflow: initial;
+                display: block;
+                overflow: initial;
+                /* min-width: 6em; */
+              }
+            }
           }
 
-          &:hover {
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-          }
+          .recommended_text {
 
-          .author {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 0.5rem;
-          }
-
-          .content {
-            font-size: 1.2rem;
-            color: #666;
-            line-height: 1.5;
           }
         }
       }

@@ -9,6 +9,7 @@ import Turkey from "./pages/posts"
 import PostsLayout from "./layouts/PostsLayout"
 import AddPost from "./pages/addPost"
 import Post from "./pages/post"
+import UpdateRight from './pages/updateRight';
 
 const App = () => {
   useEffect(() => {
@@ -46,6 +47,10 @@ const App = () => {
     {
       path: "post",
       element: <Post />,
+    },
+    {
+      path: "update-right",
+      element: <UpdateRight />,
     },
     { path: "register", element: <Register /> },
     { path: "add-post", element: <AddPost /> },

@@ -1,0 +1,30 @@
+.footer {
+  background-color: black;
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #999;
+  z-index: 1;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  a {
+    color: #999;
+    &:hover {
+      color: #666;
+    }
+  }
+
+  .footer_copyright {
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .footer_text {
+    margin-bottom: 0.5rem;
+    max-width: 60%;
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import commentsStyles from "../sass/comments.module.scss"
 
 interface Comment {
@@ -23,7 +23,7 @@ const Comments = () => {
   }
 
   return (
-    <div className={commentsStyles.comments}>
+    <div id="comments" className={commentsStyles.comments}>
       <h2>Comments</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="new-comment">Add a comment:</label>

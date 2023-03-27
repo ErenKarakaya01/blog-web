@@ -9,16 +9,16 @@ import Layout from "./Layout"
 const PostsLayout = ({ url }: { url: string }) => {
   return (
     <Layout>
-      <div className={homeStyles.carousel}>
-        <CardsCarousel />
-      </div>
+      <div className={homeStyles.content}>
+        <div className={homeStyles.carousel}>
+          <CardsCarousel />
+        </div>
 
-      <Divider
-        className={homeStyles.divider}
-      />
+        <Divider className={homeStyles.divider} />
 
-      <div className={homeStyles.blog__posts}>
-        <BlogPostCard />
+        <div className={homeStyles.blog__posts}>
+          <BlogPostCard />
+        </div>
       </div>
     </Layout>
   )
