@@ -1,4 +1,4 @@
-import { Divider, TextInput } from "@mantine/core"
+import { Divider, TextInput, Textarea } from "@mantine/core"
 import Layout from "../layouts/Layout"
 import homeStyles from "../sass/home.module.scss"
 import PostFormLayoutStyles from "../sass/postFormLayout.module.scss"
@@ -7,8 +7,8 @@ import StyledDropzone from "./../components/StyledDropzone"
 import RightBar from "./../components/RightBar"
 
 const UpdateRight = () => {
+  const [img, setImg] = useState<File | null>(null)
   const [attributes, setAttributes] = useState({
-    imgUrl: "",
     title: "",
     text: "",
   })
@@ -21,7 +21,7 @@ const UpdateRight = () => {
     <Layout>
       <div className={homeStyles.content}>
         <div className={PostFormLayoutStyles.container}>
-          <StyledDropzone />
+          <StyledDropzone setImg={setImg} />
 
           <Divider style={{ margin: "1em 0" }} />
 
@@ -31,20 +31,19 @@ const UpdateRight = () => {
             onChange={handleChange}
             label="Başlık"
             placeholder="Başlık giriniz"
-            description="İtalya gezi rehberi, İtalya'da neler yapılır vs."
+            description="Biz kimiz vs."
             required
           />
 
           <Divider style={{ margin: "1em 0" }} />
 
-          <TextInput
-            value={attributes.text}
-            name="text"
-            onChange={handleChange}
-            label="Şehir, Bölge, İlçe vs."
-            placeholder="Yer giriniz"
-            description="Roma, Kapadokya, Kadıköy vs."
-            required
+          <Textarea
+            label="Açıklama"
+            placeholder="Açıklama giriniz"
+            autosize
+            minRows={2}
+            maxRows={4}
+            maxLength={200}
           />
 
           <Divider style={{ margin: "1em 0" }} />

@@ -1,16 +1,24 @@
 import { Group, Text, useMantineTheme } from "@mantine/core"
-import { IconUpload, IconPhoto, IconX } from "@tabler/icons-react"
+import { IconUpload, IconPhoto, IconX, IconCheck } from "@tabler/icons-react"
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone"
+import { showSuccess, showError } from "../core/utils/notifications"
+import { showNotification } from '@mantine/notifications'
 
-const StyledDropzone = (props: Partial<DropzoneProps>) => {
+
+const StyledDropzone = ({ setImg }: { setImg: React.Dispatch<File> }) => {
   const theme = useMantineTheme()
   return (
     <Dropzone
-      onDrop={(files) => console.log("accepted files", files)}
-      onReject={(files) => console.log("rejected files", files)}
+      onDrop={(files) => {
+        setImg(files[0])
+        showSuccess("Resim yüklendi")
+        console.log(files[0])
+      }}
+      onReject={(files) => {
+        showError("Resim yüklenemedi")
+      }}
       maxSize={3 * 1024 ** 2}
       accept={IMAGE_MIME_TYPE}
-      {...props}
     >
       <Group
         position="center"
