@@ -11,6 +11,7 @@ import AddPost from "./pages/addPost"
 import Post from "./pages/post"
 import UpdateRight from "./pages/updateRight"
 import AdminPosts from "./pages/adminPosts"
+import EditPost from './pages/editPost';
 
 const App = () => {
   useEffect(() => {
@@ -56,6 +57,10 @@ const App = () => {
     {
       path: "admin-posts",
       element: <AdminPosts />,
+    },
+    {
+      path: "edit-post/:id",
+      element: <EditPost />,
     },
     { path: "register", element: <Register /> },
     { path: "add-post", element: <AddPost /> },

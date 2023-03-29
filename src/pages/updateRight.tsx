@@ -13,7 +13,9 @@ const UpdateRight = () => {
     text: "",
   })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange: React.ChangeEventHandler<
+    HTMLTextAreaElement | HTMLInputElement
+  > = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAttributes({ ...attributes, [e.target.name]: e.target.value })
   }
 
@@ -39,16 +41,27 @@ const UpdateRight = () => {
 
           <Textarea
             label="Açıklama"
+            value={attributes.text}
+            name="text"
+            onChange={handleChange}
             placeholder="Açıklama giriniz"
             autosize
             minRows={2}
             maxRows={4}
             maxLength={200}
+            wrap="soft"
           />
 
           <Divider style={{ margin: "1em 0" }} />
         </div>
       </div>
+      <RightBar
+        imgUrl={
+          img ? URL.createObjectURL(img) : "https://picsum.photos/1000/1000"
+        }
+        title={attributes.title}
+        text={attributes.text}
+      />
     </Layout>
   )
 }

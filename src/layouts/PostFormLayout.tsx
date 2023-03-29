@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Layout from "./Layout"
 import {
   Divider,
@@ -18,10 +18,11 @@ import {
   setCategory,
   setPlace,
   setTags,
+  setContent,
 } from "../redux/post/postSlice"
 import homeStyles from "../sass/home.module.scss"
 
-const PostFormLayout = () => {
+const PostFormLayout = ({ id }: { id?: string }) => {
   const [data, setData] = useState([
     { value: "türkiye", label: "Türkiye" },
     { value: "dünya", label: "Dünya" },
@@ -33,73 +34,84 @@ const PostFormLayout = () => {
   const tags = useAppSelector((state) => state.post.tags)
   const dispatch = useAppDispatch()
 
+  useEffect(() => {
+    if (!id) {
+      setTitle("")
+      setCategory("")
+      setPlace("")
+      setTags([])
+      setContent("")
+    } else {
+      // fetch post from api
+      // set post data to redux
+    }
+  }, [])
+
   return (
     <Layout>
       <div className={homeStyles.content}>
-        <div className={PostFormLayoutStyles.container}>
-          <TextInput
-            value={title}
-            onChange={(e) => dispatch(setTitle(e.target.value))}
-            label="Başlık"
-            placeholder="Başlık giriniz"
-            description="İtalya gezi rehberi, İtalya'da neler yapılır vs."
-            required
-          />
+        <TextInput
+          value={title}
+          onChange={(e) => dispatch(setTitle(e.target.value))}
+          label="Başlık"
+          placeholder="Başlık giriniz"
+          description="İtalya gezi rehberi, İtalya'da neler yapılır vs."
+          required
+        />
 
-          <Divider style={{ margin: "1em 0" }} />
+        <Divider style={{ margin: "1em 0" }} />
 
-          <Select
-            label="Kategori"
-            data={[
-              { value: "Türkiye", label: "Türkiye" },
-              { value: "Dünya", label: "Dünya" },
-            ]}
-            description="Dünya, Türkiye"
-            placeholder="Kategori seçiniz"
-            nothingFound="Birşey bulunamadı"
-            value={category}
-            onChange={(value) => dispatch(setCategory(value as string))}
-            required
-          />
+        <Select
+          label="Kategori"
+          data={[
+            { value: "Türkiye", label: "Türkiye" },
+            { value: "Dünya", label: "Dünya" },
+          ]}
+          description="Dünya, Türkiye"
+          placeholder="Kategori seçiniz"
+          nothingFound="Birşey bulunamadı"
+          value={category}
+          onChange={(value) => dispatch(setCategory(value as string))}
+          required
+        />
 
-          <Divider style={{ margin: "1em 0" }} />
+        <Divider style={{ margin: "1em 0" }} />
 
-          <TextInput
-            value={place}
-            onChange={(e) => dispatch(setPlace(e.target.value))}
-            label="Şehir, Bölge, İlçe vs."
-            placeholder="Yer giriniz"
-            description="Roma, Kapadokya, Kadıköy vs."
-            required
-          />
+        <TextInput
+          value={place}
+          onChange={(e) => dispatch(setPlace(e.target.value))}
+          label="Şehir, Bölge, İlçe vs."
+          placeholder="Yer giriniz"
+          description="Roma, Kapadokya, Kadıköy vs."
+          required
+        />
 
-          <Divider style={{ margin: "1em 0" }} />
+        <Divider style={{ margin: "1em 0" }} />
 
-          <MultiSelect
-            value={tags}
-            onChange={(value) => dispatch(setTags(value))}
-            data={data}
-            label="Tagler"
-            placeholder="Tag ekleyiniz"
-            searchable
-            searchValue={searchValue}
-            onSearchChange={onSearchChange}
-            creatable
-            getCreateLabel={(query) => `+ Oluştur ${query}`}
-            onCreate={(query) => {
-              const item = { value: query, label: query }
-              setData((data) => [...data, item])
-              return item
-            }}
-            required
-          />
+        <MultiSelect
+          value={tags}
+          onChange={(value) => dispatch(setTags(value))}
+          data={data}
+          label="Tagler"
+          placeholder="Tag ekleyiniz"
+          searchable
+          searchValue={searchValue}
+          onSearchChange={onSearchChange}
+          creatable
+          getCreateLabel={(query) => `+ Oluştur ${query}`}
+          onCreate={(query) => {
+            const item = { value: query, label: query }
+            setData((data) => [...data, item])
+            return item
+          }}
+          required
+        />
 
-          <Divider style={{ margin: "1em 0" }} />
+        <Divider style={{ margin: "1em 0" }} />
 
-          <StyledTextEditorv2 />
-          <BasicSpeedDial />
-        </div>
+        <StyledTextEditorv2 />
       </div>
+      <BasicSpeedDial />
     </Layout>
   )
 }

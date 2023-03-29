@@ -5,6 +5,7 @@ import homeStyles from "../sass/home.module.scss"
 import BlogPostCard from "../components/BlogPostCard"
 import CardsCarousel from "../components/Carousel"
 import Layout from "./Layout"
+import RightBar from '../components/RightBar'
 
 const PostsLayout = ({ url }: { url: string }) => {
   return (
@@ -20,6 +21,12 @@ const PostsLayout = ({ url }: { url: string }) => {
           <BlogPostCard />
         </div>
       </div>
+      <RightBar
+        imgUrl="https://picsum.photos/1000/1000"
+        title="You've won a million dollars in cash!"
+        text="Please click anywhere on this card to claim your reward, this is not a
+        fraud, trust us"
+      />
     </Layout>
   )
 }
