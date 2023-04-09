@@ -5,7 +5,17 @@ import { useDisclosure } from "@mantine/hooks"
 import { useNavigate } from "react-router-dom"
 import useRandomColor from "../hooks/useRandomColor"
 
-const BlogPostCard = () => {
+const BlogPostCard = ({
+  id,
+  date,
+  title,
+  content,
+}: {
+  id: string
+  date: Date
+  title: string
+  content: string
+}) => {
   const [opened, { toggle }] = useDisclosure(false)
   const navigate = useNavigate()
   const getRandomColor = useRandomColor()
@@ -54,34 +64,30 @@ const BlogPostCard = () => {
             weight={500}
           >
             <span style={{ color: "black" }}>{"place"}</span>・
-            {new Date().toLocaleDateString()}
+            {date.toLocaleDateString("tr-TR", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}{" "}
+            tarihinde yayınlandı
           </Text>
           <Text lineClamp={1} className={blogPostCardStyles.card__title}>
-            Title
+            {title}
           </Text>
 
           <div className={blogPostCardStyles.card__text__overlay}>
             <Text
               lineClamp={window.innerWidth <= 576 ? 6 : 4}
               className={blogPostCardStyles.card__text}
-            >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Praesentium aut odit voluptas laudantium pariatur ducimus nemo
-              doloremque sequi eius maiores. Consectetur esse perferendis
-              quisquam iste inventore cumque soluta neque voluptatibus. Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Praesentium aut
-              odit voluptas laudantium pariatur ducimus nemo doloremque sequi
-              eius maiores. Consectetur esse perferendis quisquam iste inventore
-              cumque soluta neque voluptatibus.
-            </Text>
+            ></Text>
           </div>
 
           <div className={blogPostCardStyles.card__btn__overlay}>
             <button
               className={blogPostCardStyles.card__btn}
-              onClick={() => navigate("/1")}
+              onClick={() => navigate(`/post/${id}`)}
             >
-              Read More
+              Daha fazla
             </button>
           </div>
         </div>

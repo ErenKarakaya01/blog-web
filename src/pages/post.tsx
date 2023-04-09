@@ -7,27 +7,23 @@ import homeStyles from "../sass/home.module.scss"
 import BlogPostCard from "../components/BlogPostCard"
 import RightBar from "./../components/RightBar"
 import Comments from "../components/Comments"
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
+import PostView from "../components/PostView"
+import { useNavigate, useParams } from "react-router-dom"
+import { doc, getDoc } from "firebase/firestore"
+import { db } from "../firebase/firebase"
+import usePost from "../hooks/usePost"
 
 const Post = () => {
+  const { id } = useParams()
+  const post = usePost(id)
+
   return (
     <Layout>
       <LeftBar />
-      <div className={homeStyles.content}>
-        <div className={homeStyles.carousel}>
-          <CardsCarousel />
-        </div>
 
-        <Divider className={homeStyles.divider} />
+      <PostView {...post} />
 
-        <div className={homeStyles.blog__posts}>
-          <BlogPostCard />
-        </div>
-
-        <Divider className={homeStyles.divider} />
-
-        <Comments />
-      </div>
       <RightBar
         imgUrl="https://picsum.photos/1000/1000"
         title="You've won a million dollars in cash!"

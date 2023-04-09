@@ -12,7 +12,6 @@ const LeftBar = () => {
   const [count, setCount] = useState(0)
   const likedCount = useMemo(() => (liked ? count + 1 : count), [liked])
 
-  
   const scroll = () => {
     const section = document.querySelector("#comments")
     section?.scrollIntoView({ behavior: "smooth", block: "start" })

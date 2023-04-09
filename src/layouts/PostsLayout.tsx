@@ -5,9 +5,9 @@ import homeStyles from "../sass/home.module.scss"
 import BlogPostCard from "../components/BlogPostCard"
 import CardsCarousel from "../components/Carousel"
 import Layout from "./Layout"
-import RightBar from '../components/RightBar'
+import RightBar from "../components/RightBar"
 
-const PostsLayout = ({ url }: { url: string }) => {
+const PostsLayout = ({ category, title }: { category?: string, title?: string | null }) => {
   return (
     <Layout>
       <div className={homeStyles.content}>
@@ -18,7 +18,7 @@ const PostsLayout = ({ url }: { url: string }) => {
         <Divider className={homeStyles.divider} />
 
         <div className={homeStyles.blog__posts}>
-          <BlogPostCard />
+          <BlogPostCard id={""} date={new Date()} title={""} content={""} />
         </div>
       </div>
       <RightBar

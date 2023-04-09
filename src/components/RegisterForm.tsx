@@ -3,6 +3,8 @@ import { useForm, UseFormReturnType } from "@mantine/form"
 import formStyles from "../sass/form.module.scss"
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase/firebase'
+import { useNavigate } from 'react-router-dom'
+import { setUser } from '../redux/user/userSlice'
 
 interface FormValues {
   email: string
@@ -11,6 +13,8 @@ interface FormValues {
 }
 
 const RegisterForm = () => {
+  const navigate = useNavigate()
+
   // Handles form input formats
   const form: UseFormReturnType<FormValues> = useForm<FormValues>({
     initialValues: {
@@ -37,8 +41,8 @@ const RegisterForm = () => {
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user
-        console.log(user)
+        setUser(userCredential.user)
+        navigate("/")
       })
       .catch((error) => {
         const errorCode = error.code
@@ -72,8 +76,8 @@ const RegisterForm = () => {
       />
 
       <Group position="apart" mt="md">
-        <a href="/login">Login</a>
-        <Button type="submit">Register</Button>
+        <a href="/login">Giriş Yap</a>
+        <Button type="submit">Kayıt Ol</Button>
       </Group>
     </form>
   )

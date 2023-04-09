@@ -12,19 +12,35 @@ import PostFormLayoutStyles from "../sass/postFormLayout.module.scss"
 import { useAppSelector } from "../redux/hooks"
 import { Text } from "@mantine/core"
 import "../sass/global.css"
-import useRandomColor from "./../hooks/useRandomColor"
+import useRandomColor from "../hooks/useRandomColor"
+import CardsCarousel from "./Carousel"
+import Comments from "./Comments"
 
-const Post = () => {
-  const title = useAppSelector((state) => state.post.title)
-  const category = useAppSelector((state) => state.post.category)
-  const place = useAppSelector((state) => state.post.place)
-  const tags = useAppSelector((state) => state.post.tags)
-  const content = useAppSelector((state) => state.post.content)
-
+const PostView = ({
+  title,
+  category,
+  place,
+  tags,
+  content,
+  created,
+}: {
+  title: string
+  category: string
+  place: string
+  tags: string[]
+  content: string
+  created: { seconds: number; nanoseconds: number }
+}) => {
   const getRandomColor = useRandomColor()
 
   return (
     <div className={homeStyles.content}>
+      <div className={homeStyles.carousel}>
+        <CardsCarousel />
+      </div>
+
+      <Divider className={homeStyles.divider} />
+
       <div
         style={{
           display: "flex",
@@ -32,6 +48,7 @@ const Post = () => {
           justifyContent: "space-between",
           color: useMantineTheme().colors.gray[6],
           flexDirection: "column",
+          textTransform: "capitalize",
         }}
       >
         <Indicator
@@ -49,6 +66,7 @@ const Post = () => {
               color: useMantineTheme().colors.dark[6],
               marginBottom: "0.5em",
               fontSize: "3em",
+              textTransform: "capitalize",
             }}
             size="xl"
             weight={700}
@@ -69,14 +87,19 @@ const Post = () => {
           weight={500}
         >
           <span style={{ color: "black" }}>{place}</span>・
-          {new Date().toLocaleDateString()} tarihinde yayınlandı
+          {new Date(created?.seconds * 1000).toLocaleDateString("tr-TR", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}{" "}
+          tarihinde yayınlandı
         </Text>
       </div>
 
       <Divider style={{ marginBottom: "1em" }} />
 
       <Avatar.Group spacing="sm" p={20}>
-        {tags.map((tag) => (
+        {tags?.map((tag) => (
           <Badge color={getRandomColor()}>#{tag}</Badge>
         ))}
       </Avatar.Group>
@@ -93,8 +116,12 @@ const Post = () => {
           </div>
         </TypographyStylesProvider>
       </div>
+
+      <Divider className={homeStyles.divider} />
+
+      <Comments />
     </div>
   )
 }
 
-export default Post
+export default PostView

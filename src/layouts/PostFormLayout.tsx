@@ -9,7 +9,7 @@ import {
 } from "@mantine/core"
 import RichTextEditor from "@mantine/rte"
 import PostFormLayoutStyles from "../sass/postFormLayout.module.scss"
-import StyledTextEditorv2 from "./../components/StyledTextEditorv2"
+import StyledTextEditorv2 from "../components/StyledTextEditor"
 import "../sass/global.css"
 import BasicSpeedDial from "./../components/BasicSpeedDial"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
@@ -19,9 +19,14 @@ import {
   setPlace,
   setTags,
   setContent,
+  resetPost,
 } from "../redux/post/postSlice"
 import homeStyles from "../sass/home.module.scss"
+import { collection, doc, getDoc, getDocs } from "firebase/firestore"
+import { db } from "../firebase/firebase"
+import { useNavigate } from "react-router-dom"
 
+// id is for edit post page, if id is undefined, it means create post
 const PostFormLayout = ({ id }: { id?: string }) => {
   const [data, setData] = useState([
     { value: "türkiye", label: "Türkiye" },
@@ -33,17 +38,25 @@ const PostFormLayout = ({ id }: { id?: string }) => {
   const place = useAppSelector((state) => state.post.place)
   const tags = useAppSelector((state) => state.post.tags)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!id) {
-      setTitle("")
-      setCategory("")
-      setPlace("")
-      setTags([])
-      setContent("")
+      dispatch(resetPost(true))
     } else {
       // fetch post from api
       // set post data to redux
+      getDoc(doc(db, "posts", id)).then((snapshot) => {
+        if (!snapshot.exists()) {
+          return navigate("/404")
+        }
+        
+        dispatch(setTitle(snapshot.data()?.title))
+        dispatch(setCategory(snapshot.data()?.category))
+        dispatch(setPlace(snapshot.data()?.place))
+        dispatch(setTags(snapshot.data()?.tags))
+        dispatch(setContent(snapshot.data()?.content))
+      })
     }
   }, [])
 
@@ -111,7 +124,7 @@ const PostFormLayout = ({ id }: { id?: string }) => {
 
         <StyledTextEditorv2 />
       </div>
-      <BasicSpeedDial />
+      <BasicSpeedDial id={id} />
     </Layout>
   )
 }

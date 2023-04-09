@@ -5,13 +5,14 @@ import { useEffect, useState } from "react"
 import { auth } from "./firebase/firebase"
 import { onAuthStateChanged } from "firebase/auth"
 import Home from "./pages/home"
-import Turkey from "./pages/posts"
+import Turkey from "./pages/search"
 import PostsLayout from "./layouts/PostsLayout"
 import AddPost from "./pages/addPost"
 import Post from "./pages/post"
 import UpdateRight from "./pages/updateRight"
 import AdminPosts from "./pages/adminPosts"
-import EditPost from './pages/editPost';
+import EditPost from "./pages/editPost"
+import Category from "./pages/category"
 
 const App = () => {
   useEffect(() => {
@@ -33,21 +34,14 @@ const App = () => {
     {
       path: "/",
       element: <Home />,
-      children: [],
     },
     {
-      path: "/posts",
-      element: <PostsLayout url={""} />,
-      children: [
-        {
-          path: "turkey",
-          element: <Turkey />,
-        },
-      ],
+      path: "/category/:category",
+      element: <Category />,
     },
     { path: "login", element: <Login /> },
     {
-      path: "post",
+      path: "post/:id",
       element: <Post />,
     },
     {

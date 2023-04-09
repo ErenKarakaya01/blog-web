@@ -8,7 +8,7 @@ import { faker } from "@faker-js/faker"
 import PostsLayout from "../layouts/PostsLayout"
 
 const Home = () => {
-  return <PostsLayout url="" />
+  return <PostsLayout />
 }
 
 export default Home

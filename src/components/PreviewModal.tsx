@@ -1,7 +1,8 @@
 import { useMediaQuery } from "@mantine/hooks"
 import { Modal, useMantineTheme } from "@mantine/core"
 import { useAppSelector } from "../redux/hooks"
-import Post from "./Post"
+import PostView from "./PostView"
+import { Timestamp } from 'firebase/firestore'
 
 const PreviewModal = ({
   opened,
@@ -12,6 +13,7 @@ const PreviewModal = ({
 }) => {
   const isMobile = useMediaQuery("(max-width: 50em)")
   const theme = useMantineTheme()
+  const post = useAppSelector((state) => state.post)
 
   return (
     <>
@@ -30,7 +32,7 @@ const PreviewModal = ({
         overlayOpacity={0.55}
         size={isMobile ? "xs" : "960px"}
       >
-        <Post />
+        <PostView {...post} created={Timestamp.fromDate(new Date())} />
       </Modal>
     </>
   )

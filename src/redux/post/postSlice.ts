@@ -8,6 +8,7 @@ interface PostState {
   place: string
   tags: string[]
   content: string
+  images: string[]
 }
 
 // Define the initial state using that type
@@ -17,6 +18,7 @@ const initialState: PostState = {
   place: "",
   tags: [],
   content: "",
+  images: [],
 }
 
 export const contentSlice = createSlice({
@@ -34,22 +36,39 @@ export const contentSlice = createSlice({
     setPlace: (state, action: PayloadAction<string>) => {
       state.place = action.payload
     },
-    setTags: (
-      state,
-      action: PayloadAction<string[]>
-    ) => {
+    setTags: (state, action: PayloadAction<string[]>) => {
       state.tags = action.payload
     },
     setContent: (state, action: PayloadAction<string>) => {
       state.content = action.payload
     },
+    addImage: (state, action: PayloadAction<string>) => {
+      state.images = [...state.images, action.payload]
+    },
+    resetPost: (state, action: PayloadAction<boolean>) => {
+      if (action.payload) {
+        state.category = ""
+        state.content = ""
+        state.images = []
+        state.place = ""
+        state.tags = []
+        state.title = ""
+      }
+    },
   },
 })
 
-export const { setTitle, setCategory, setPlace, setTags, setContent } =
-  contentSlice.actions
+export const {
+  setTitle,
+  setCategory,
+  setPlace,
+  setTags,
+  setContent,
+  addImage,
+  resetPost,
+} = contentSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectPost = (state: RootState) => state.post.content
+export const selectPost = (state: RootState) => state.post
 
 export default contentSlice.reducer

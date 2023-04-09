@@ -34,7 +34,7 @@ const RightBar = ({
 
       <Divider className={homeStyles.divider} />
 
-      <Recommended />
+      <Recommended posts={[]} />
     </div>
   )
 }

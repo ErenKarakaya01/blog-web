@@ -22,7 +22,9 @@ import MessageIcon from "@mui/icons-material/Message"
 import SettingsIcon from "@mui/icons-material/Settings"
 import StarIcon from "@mui/icons-material/Star"
 import DeleteIcon from "@mui/icons-material/Delete"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
+import { signOut } from "firebase/auth"
+import { auth } from "../firebase/firebase"
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -129,6 +131,7 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
   const [opened, { toggle }] = useDisclosure(false)
   const { classes, cx } = useStyles()
   const [userMenuOpened, setUserMenuOpened] = useState(false)
+  const navigate = useNavigate()
 
   const items = links.map((link) => (
     <NavLink
@@ -205,7 +208,23 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
 
             <Menu.Label>Settings</Menu.Label>
             <Menu.Item icon={<SettingsIcon />}>Account settings</Menu.Item>
-            <Menu.Item icon={<LogoutIcon />}>Logout</Menu.Item>
+            <Menu.Item icon={<LogoutIcon />}>
+              <div
+                onClick={() => {
+                  signOut(auth)
+                    .then(() => {
+                      // Sign-out successful.
+                      navigate("/login")
+                    })
+                    .catch((error) => {
+                      // An error happened.
+                      console.log(error)
+                    })
+                }}
+              >
+                Logout
+              </div>
+            </Menu.Item>
 
             <Menu.Divider />
 

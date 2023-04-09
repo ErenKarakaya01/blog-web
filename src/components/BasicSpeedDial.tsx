@@ -23,7 +23,7 @@ import PreviewModal from "./PreviewModal"
   { icon: <ShareIcon />, name: "Share" },
 ] */
 
-export default function BasicSpeedDial() {
+export default function BasicSpeedDial({ id }: { id: string | undefined }) {
   const [open, setOpen] = useState(false)
   const [previewOpened, { toggle }] = useDisclosure(false)
 
@@ -70,7 +70,7 @@ export default function BasicSpeedDial() {
           }}
         />
       </SpeedDial>
-      <PublishDialog open={open} setOpen={setOpen} />
+      <PublishDialog open={open} setOpen={setOpen} id={id} />
       <PreviewModal opened={previewOpened} toggle={toggle} />
     </Box>
   )

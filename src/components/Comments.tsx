@@ -24,9 +24,9 @@ const Comments = () => {
 
   return (
     <div id="comments" className={commentsStyles.comments}>
-      <h2>Comments</h2>
+      <h2>Yorumlar</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="new-comment">Add a comment:</label>
+        <label htmlFor="new-comment">Yorum Ekle:</label>
         <div className={commentsStyles.input_container}>
           <input
             id="new-comment"
@@ -35,11 +35,11 @@ const Comments = () => {
             value={newComment}
             onChange={(event) => setNewComment(event.target.value)}
           />
-          <button type="submit">Comment</button>
+          <button type="submit">Gönder</button>
         </div>
       </form>
       {comments.length === 0 && (
-        <p>No comments yet. Be the first to comment!</p>
+        <p>Henüz yorum yapılmamış. İlk yorumu sen yap!</p>
       )}
       <ul>
         {comments.map((comment, index) => (
