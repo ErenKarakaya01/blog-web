@@ -10,7 +10,8 @@ import { RichTextEditor } from "@mantine/rte"
 import { useDispatch } from "react-redux"
 import { setContent, addImage } from "../redux/post/postSlice"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import useStorage from '../hooks/useStorage';
+import useStorage from "../hooks/useStorage"
+import { useParams } from "react-router-dom"
 
 const StyledTextEditorv2 = () => {
   const [file, setFile] = useState<File | null>(null)
@@ -18,6 +19,7 @@ const StyledTextEditorv2 = () => {
   const editorRef = useRef(null)
   const dispatch = useAppDispatch()
   const content = useAppSelector((state) => state.post.content)
+  const { id } = useParams()
 
   useEffect(() => {
     if (url) {
@@ -26,6 +28,9 @@ const StyledTextEditorv2 = () => {
   }, [url])
 
   useEffect(() => {
+    // edit check edit post
+    if (!content && id) return
+
     if (editorRef.current) {
       const editor = new Quill(editorRef.current, {
         theme: "snow",
@@ -61,7 +66,7 @@ const StyledTextEditorv2 = () => {
                   const file = input.files![0]
                   console.log(file)
                   setFile(file)
-                  
+
                   const formData = new FormData()
                   formData.append("image", file)
 
@@ -101,7 +106,7 @@ const StyledTextEditorv2 = () => {
     return () => {
       editorRef.current = null
     }
-  }, [])
+  }, [content, dispatch, id])
 
   return (
     <div className={PostFormLayoutStyles.content}>

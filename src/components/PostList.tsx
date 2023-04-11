@@ -2,6 +2,8 @@ import React from "react"
 import postListStyles from "../sass/postList.module.scss"
 import { Button } from "@mantine/core"
 import { Link } from "react-router-dom"
+import { useDisclosure } from '@mantine/hooks'
+import DeleteDialog from './DeleteDialog'
 
 interface Post {
   id: string
@@ -9,6 +11,8 @@ interface Post {
 }
 
 const PostList = ({ posts }: { posts: Post[] }) => {
+  const [deleteOpened, { toggle }] = useDisclosure(false)
+
   return (
     <ul className={postListStyles.post_list}>
       {posts?.map((post) => (
@@ -24,9 +28,11 @@ const PostList = ({ posts }: { posts: Post[] }) => {
               </Button>
             </Link>
             
-            <Button variant="outline" color="red">
+            <Button variant="outline" color="red" onClick={toggle}>
               Sil
             </Button>
+
+            <DeleteDialog open={deleteOpened} toggle={toggle} id={post.id} />
           </div>
         </li>
       ))}

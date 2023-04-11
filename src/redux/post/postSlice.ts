@@ -45,15 +45,16 @@ export const contentSlice = createSlice({
     addImage: (state, action: PayloadAction<string>) => {
       state.images = [...state.images, action.payload]
     },
-    resetPost: (state, action: PayloadAction<boolean>) => {
-      if (action.payload) {
-        state.category = ""
-        state.content = ""
-        state.images = []
-        state.place = ""
-        state.tags = []
-        state.title = ""
-      }
+    setImages: (state, action: PayloadAction<string[]>) => {
+      state.images = action.payload
+    },
+    resetPost: (state) => {
+      state.category = ""
+      state.content = ""
+      state.images = []
+      state.place = ""
+      state.tags = []
+      state.title = ""
     },
   },
 })
@@ -66,6 +67,7 @@ export const {
   setContent,
   addImage,
   resetPost,
+  setImages,
 } = contentSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type

@@ -20,6 +20,7 @@ import {
   setTags,
   setContent,
   resetPost,
+  setImages
 } from "../redux/post/postSlice"
 import homeStyles from "../sass/home.module.scss"
 import { collection, doc, getDoc, getDocs } from "firebase/firestore"
@@ -41,9 +42,9 @@ const PostFormLayout = ({ id }: { id?: string }) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!id) {
-      dispatch(resetPost(true))
-    } else {
+    dispatch(resetPost())
+
+    if (id) {
       // fetch post from api
       // set post data to redux
       getDoc(doc(db, "posts", id)).then((snapshot) => {
@@ -56,9 +57,10 @@ const PostFormLayout = ({ id }: { id?: string }) => {
         dispatch(setPlace(snapshot.data()?.place))
         dispatch(setTags(snapshot.data()?.tags))
         dispatch(setContent(snapshot.data()?.content))
+        dispatch(setImages(snapshot.data()?.images))
       })
     }
-  }, [])
+  }, [id])
 
   return (
     <Layout>
@@ -77,8 +79,8 @@ const PostFormLayout = ({ id }: { id?: string }) => {
         <Select
           label="Kategori"
           data={[
-            { value: "Türkiye", label: "Türkiye" },
-            { value: "Dünya", label: "Dünya" },
+            { value: "türkiye", label: "Türkiye" },
+            { value: "dünya", label: "Dünya" },
           ]}
           description="Dünya, Türkiye"
           placeholder="Kategori seçiniz"
@@ -104,7 +106,7 @@ const PostFormLayout = ({ id }: { id?: string }) => {
         <MultiSelect
           value={tags}
           onChange={(value) => dispatch(setTags(value))}
-          data={data}
+          data={tags || data}
           label="Tagler"
           placeholder="Tag ekleyiniz"
           searchable
@@ -130,3 +132,4 @@ const PostFormLayout = ({ id }: { id?: string }) => {
 }
 
 export default PostFormLayout
+

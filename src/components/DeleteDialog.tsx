@@ -5,7 +5,7 @@ import DialogActions from "@mui/material/DialogActions"
 import DialogContent from "@mui/material/DialogContent"
 import DialogContentText from "@mui/material/DialogContentText"
 import DialogTitle from "@mui/material/DialogTitle"
-import { Timestamp, addDoc, doc, updateDoc } from "firebase/firestore"
+import { Timestamp, addDoc, deleteDoc, doc, updateDoc } from "firebase/firestore"
 import firebase, { db } from "../firebase/firebase"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { postCollection } from "../firebase/firebase"
@@ -13,52 +13,26 @@ import { showError } from "../core/utils/notifications"
 import { resetPost, setTitle } from "../redux/post/postSlice"
 import { useNavigate } from "react-router-dom"
 
-const PublishDialog = ({
+const DeleteDialog = ({
   open,
-  setOpen,
+  toggle,
   id,
 }: {
   open: boolean
-  setOpen: (value: boolean) => void
-  id: string | undefined
+  toggle: () => void
+  id: string
 }) => {
-  const post = useAppSelector((state) => state.post)
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-
   const handleClose = () => {
-    setOpen(false)
+    toggle()
   }
 
   const handleSubmit = () => {
-    if (
-      !post.title ||
-      !post.category ||
-      !post.place ||
-      !post.tags ||
-      !post.content
-    )
-      return showError("Lütfen tüm alanları doldurunuz.")
-
-    const postObj = {
-      ...post,
-      title: post.title.toLowerCase(),
-      category: post.category.toLowerCase(),
-      created: Timestamp.fromDate(new Date()),
-    }
-
     try {
-      if (id) {
-        updateDoc(doc(db, "posts", id), postObj)
-      } else {
-        addDoc(postCollection, postObj)
-      }
+      deleteDoc(doc(db, "posts", id))
     } catch (error) {
       console.log(error)
     } finally {
-      dispatch(resetPost())
-      setOpen(false)
-      navigate("/")
+      toggle()
     }
   }
 
@@ -89,4 +63,4 @@ const PublishDialog = ({
   )
 }
 
-export default PublishDialog
+export default DeleteDialog
