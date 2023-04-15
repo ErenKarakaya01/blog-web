@@ -2,8 +2,8 @@
   list-style: none;
   padding: 1em;
   margin: 0;
-  width: 940px;
-  
+  width: 95%;
+
   .post_item {
     margin-bottom: 20px;
     display: flex;
@@ -11,12 +11,12 @@
     align-items: center;
     padding: 1em;
     border-radius: 1em;
+    width: 95%;
 
     &:hover {
       background-color: rgba(248, 248, 248, 0.818);
-      cursor: pointer;
     }
-    
+
     .post_title {
       text-align: center;
     }

@@ -12,9 +12,12 @@ import PostFormLayoutStyles from "../sass/postFormLayout.module.scss"
 import { useAppSelector } from "../redux/hooks"
 import { Text } from "@mantine/core"
 import "../sass/global.css"
-import useRandomColor from "../hooks/useRandomColor"
 import CardsCarousel from "./Carousel"
 import Comments from "./Comments"
+import getRandomColor from "../utils/getRandomColor"
+import React, { Fragment } from "react"
+import PostSkeleton from "./skeletons/PostSkeleton"
+import formatTimestamp from "../utils/formatTimestamp"
 
 const PostView = ({
   title,
@@ -31,8 +34,6 @@ const PostView = ({
   content: string
   created: { seconds: number; nanoseconds: number }
 }) => {
-  const getRandomColor = useRandomColor()
-
   return (
     <div className={homeStyles.content}>
       <div className={homeStyles.carousel}>
@@ -57,6 +58,9 @@ const PostView = ({
           inline
           size={16}
           radius={8}
+          style={{
+            maxWidth: "80%",
+          }}
         >
           <Text
             sx={{
@@ -67,6 +71,7 @@ const PostView = ({
               marginBottom: "0.5em",
               fontSize: "3em",
               textTransform: "capitalize",
+              wordBreak: "break-word",
             }}
             size="xl"
             weight={700}
@@ -87,12 +92,7 @@ const PostView = ({
           weight={500}
         >
           <span style={{ color: "black" }}>{place}</span>・
-          {new Date(created?.seconds * 1000).toLocaleDateString("tr-TR", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}{" "}
-          tarihinde yayınlandı
+          {formatTimestamp(created)} tarihinde yayınlandı
         </Text>
       </div>
 
@@ -100,7 +100,9 @@ const PostView = ({
 
       <Avatar.Group spacing="sm" p={20}>
         {tags?.map((tag) => (
-          <Badge color={getRandomColor()}>#{tag}</Badge>
+          <Fragment key={tag}>
+            <Badge color={getRandomColor()}>#{tag}</Badge>
+          </Fragment>
         ))}
       </Avatar.Group>
 

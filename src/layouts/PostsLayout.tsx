@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Navbar from "./Navbar"
 import { Divider, ScrollArea } from "@mantine/core"
 import homeStyles from "../sass/home.module.scss"
@@ -6,8 +6,29 @@ import BlogPostCard from "../components/BlogPostCard"
 import CardsCarousel from "../components/Carousel"
 import Layout from "./Layout"
 import RightBar from "../components/RightBar"
+import usePosts from "../hooks/usePosts"
+import PostCardSkeleton from "../components/skeletons/PostCardSkeleton"
 
-const PostsLayout = ({ category, title }: { category?: string, title?: string | null }) => {
+interface Post {
+  id: string
+  title: string
+  content: string
+  created: {
+    seconds: number
+    nanoseconds: number
+  }
+  category: string
+}
+
+const PostsLayout = ({
+  category,
+  title,
+}: {
+  category?: string
+  title?: string | null
+}) => {
+  const { posts, loading } = usePosts({ category, title })
+
   return (
     <Layout>
       <div className={homeStyles.content}>
@@ -18,15 +39,22 @@ const PostsLayout = ({ category, title }: { category?: string, title?: string | 
         <Divider className={homeStyles.divider} />
 
         <div className={homeStyles.blog__posts}>
-          <BlogPostCard id={""} date={new Date()} title={""} content={""} />
+          {loading ? (
+            <PostCardSkeleton />
+          ) : (
+            posts?.map((post: Post) => (
+              <BlogPostCard
+                key={post.id}
+                id={post.id}
+                created={post.created}
+                title={post.title}
+                content={post.content}
+                category={post.category}
+              />
+            ))
+          )}
         </div>
       </div>
-      <RightBar
-        imgUrl="https://picsum.photos/1000/1000"
-        title="You've won a million dollars in cash!"
-        text="Please click anywhere on this card to claim your reward, this is not a
-        fraud, trust us"
-      />
     </Layout>
   )
 }

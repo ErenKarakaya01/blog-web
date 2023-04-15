@@ -1,9 +1,12 @@
 import { Group, Text, useMantineTheme } from "@mantine/core"
 import { IconUpload, IconPhoto, IconX, IconCheck } from "@tabler/icons-react"
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone"
-import { showSuccess, showError } from "../core/utils/notifications"
-import { showNotification } from '@mantine/notifications'
-
+import {
+  showSuccess,
+  showError,
+  showWarning,
+  showLoading,
+} from "../core/utils/notifications"
 
 const StyledDropzone = ({ setImg }: { setImg: React.Dispatch<File> }) => {
   const theme = useMantineTheme()
@@ -11,7 +14,7 @@ const StyledDropzone = ({ setImg }: { setImg: React.Dispatch<File> }) => {
     <Dropzone
       onDrop={(files) => {
         setImg(files[0])
-        showSuccess("Resim yüklendi")
+        showLoading("Resim yükleniyor")
         console.log(files[0])
       }}
       onReject={(files) => {
@@ -49,10 +52,10 @@ const StyledDropzone = ({ setImg }: { setImg: React.Dispatch<File> }) => {
 
         <div>
           <Text size="xl" inline>
-            Drag images here or click to select files
+            Resim yükle
           </Text>
           <Text size="sm" color="dimmed" inline mt={7}>
-            Attach as many files as you like, each file should not exceed 5mb
+            Resim yüklemek için tıklayın
           </Text>
         </div>
       </Group>

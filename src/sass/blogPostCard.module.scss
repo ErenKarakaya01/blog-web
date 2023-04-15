@@ -23,6 +23,7 @@
   width: 80%;
   max-width: 80vw;
   transition: height 0.5s ease-in-out;
+  margin: 1rem auto;
 
   &:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -110,13 +111,21 @@
       white-space: nowrap;
       overflow: hidden !important;
       text-overflow: ellipsis;
+      word-break: break-word;
+      max-width: 100%;
     }
 
     .card__text__overlay {
+      max-height: 120px;
+      overflow: hidden;
       .card__text {
         color: #4e4a67;
         margin-bottom: 30px;
         line-height: 1.5em;
+
+        img, iframe, video, embed, object, audio, canvas, svg, select, input, textarea, button, a {
+          display: none;
+        }
 
         @media screen and (max-width: 576px) {
           width: 80%;
@@ -139,6 +148,7 @@
     }
 
     .card__btn__overlay {
+      margin-top: 1em;
       .card__btn {
         width: 15rem;
         border: 0;

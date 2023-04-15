@@ -8,10 +8,11 @@ const usePosts = ({
   num,
 }: {
   category?: string
-  title?: string
+  title?: string | null
   num?: number
 }) => {
   const [posts, setPosts] = useState<any>([])
+  const [loading, setLoading] = useState(true)
 
   // query constraints
   const constraints = []
@@ -31,12 +32,13 @@ const usePosts = ({
         ...doc.data(),
       }))
       setPosts(posts)
+      setLoading(false)
     })
-  }, [])
 
-  console.log(posts)
+    return () => setPosts([])
+  }, [category, title, num])
 
-  return posts
+  return { posts, loading }
 }
 
 export default usePosts

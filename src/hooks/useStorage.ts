@@ -5,6 +5,7 @@ import {
   getDownloadURL,
 } from "firebase/storage"
 import { useEffect, useState } from "react"
+import { showError, showSuccess } from "../core/utils/notifications"
 
 const useStorage = (file: File | null) => {
   const [url, setUrl] = useState<string | null>(null)
@@ -47,7 +48,7 @@ const useStorage = (file: File | null) => {
       (error) => {
         // A full list of error codes is available at
         // https://firebase.google.com/docs/storage/web/handle-errors
-        console.log(error)
+        showError("Resim yüklenirken bir hata oluştu")
         setError(error)
         /* switch (error.code) {
         case "storage/unauthorized":
@@ -68,7 +69,7 @@ const useStorage = (file: File | null) => {
       () => {
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL)
+          showSuccess("Resim yüklendi")
           setUrl(downloadURL)
         })
       }

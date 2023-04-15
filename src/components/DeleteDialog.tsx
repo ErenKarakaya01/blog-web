@@ -9,7 +9,7 @@ import { Timestamp, addDoc, deleteDoc, doc, updateDoc } from "firebase/firestore
 import firebase, { db } from "../firebase/firebase"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { postCollection } from "../firebase/firebase"
-import { showError } from "../core/utils/notifications"
+import { showError, showSuccess } from "../core/utils/notifications"
 import { resetPost, setTitle } from "../redux/post/postSlice"
 import { useNavigate } from "react-router-dom"
 
@@ -17,20 +17,20 @@ const DeleteDialog = ({
   open,
   toggle,
   id,
+  setDeletedPosts,
 }: {
   open: boolean
   toggle: () => void
   id: string
+  setDeletedPosts: React.Dispatch<React.SetStateAction<string[]>>
 }) => {
-  const handleClose = () => {
-    toggle()
-  }
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
-      deleteDoc(doc(db, "posts", id))
+      await deleteDoc(doc(db, "posts", id))
+      setDeletedPosts((prev) => [...prev, id])
+      showSuccess("Yazı başarıyla silindi.")
     } catch (error) {
-      console.log(error)
+      showError("Yazı silinirken bir hata oluştu.")
     } finally {
       toggle()
     }
@@ -40,20 +40,20 @@ const DeleteDialog = ({
     <div>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={toggle}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {"Silme İşlemi"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Paylaşmak istediğinize emin misiniz?
+            Bu yazıyı silmek istediğinize emin misiniz?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Hayır</Button>
+          <Button onClick={toggle}>Hayır</Button>
           <Button onClick={handleSubmit} autoFocus>
             Evet
           </Button>

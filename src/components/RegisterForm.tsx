@@ -1,10 +1,12 @@
 import { Button, Group, PasswordInput, TextInput } from "@mantine/core"
 import { useForm, UseFormReturnType } from "@mantine/form"
 import formStyles from "../sass/form.module.scss"
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../firebase/firebase'
-import { useNavigate } from 'react-router-dom'
-import { setUser } from '../redux/user/userSlice'
+import { createUserWithEmailAndPassword } from "firebase/auth"
+import { auth } from "../firebase/firebase"
+import { useNavigate } from "react-router-dom"
+import { setUser } from "../redux/user/userSlice"
+import isAdmin from "../utils/isAdmin"
+import { showError } from "../core/utils/notifications"
 
 interface FormValues {
   email: string
@@ -41,13 +43,22 @@ const RegisterForm = () => {
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential) => {
         // Signed in
-        setUser(userCredential.user)
+        setUser({
+          uid: userCredential.user.uid,
+          email: userCredential.user.email ? userCredential.user.email : "",
+          displayName: userCredential.user.displayName
+            ? userCredential.user.displayName
+            : "",
+          // generate a random avatar
+          photoURL: `https://ui-avatars.com/api/?name=${
+            userCredential.user.email ? userCredential.user.email : ""
+          }&background=0D8ABC&color=fff`,
+          admin: isAdmin(userCredential.user.uid) ? true : false,
+        })
         navigate("/")
       })
       .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log(errorCode, errorMessage)
+        showError("Kayıt başarısız oldu. Lütfen bilgilerinizi kontrol edin.")
       })
   }
 

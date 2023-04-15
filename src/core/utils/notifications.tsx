@@ -1,5 +1,5 @@
 import { showNotification } from "@mantine/notifications"
-import { IconCheck, IconX } from "@tabler/icons"
+import { IconCheck, IconX, IconAlertTriangle } from "@tabler/icons"
 import React from "react"
 
 const showSuccess = (message: string) =>
@@ -10,6 +10,14 @@ const showSuccess = (message: string) =>
     icon: <IconCheck />,
   })
 
+const showWarning = (message: string) =>
+  showNotification({
+    title: "Warning",
+    message,
+    color: "yellow",
+    icon: <IconAlertTriangle />,
+  })
+
 const showError = (message: string) =>
   showNotification({
     title: "Error",
@@ -18,4 +26,12 @@ const showError = (message: string) =>
     icon: <IconX />,
   })
 
-export { showSuccess, showError }
+const showLoading = (message: string) =>
+  showNotification({
+    title: "Loading",
+    message,
+    color: "blue",
+    loading: true,
+  })
+
+export { showSuccess, showWarning, showError, showLoading }

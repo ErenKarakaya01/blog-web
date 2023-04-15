@@ -3,30 +3,35 @@ import blogPostCardStyles from "../sass/blogPostCard.module.scss"
 import { Indicator, Modal, Text, useMantineTheme } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import { useNavigate } from "react-router-dom"
-import useRandomColor from "../hooks/useRandomColor"
+import getRandomColor from "../utils/getRandomColor"
+import formatTimestamp from "../utils/formatTimestamp"
 
 const BlogPostCard = ({
   id,
-  date,
+  created,
   title,
   content,
+  category,
 }: {
   id: string
-  date: Date
+  created: {
+    seconds: number
+    nanoseconds: number
+  }
   title: string
   content: string
+  category: string
 }) => {
   const [opened, { toggle }] = useDisclosure(false)
   const navigate = useNavigate()
-  const getRandomColor = useRandomColor()
-  const indicatorColor = useMemo(() => getRandomColor(), [getRandomColor])
+  const randomColor = useMemo(() => getRandomColor(), [])
 
   return (
     <>
       <Modal opened={opened} onClose={toggle} centered size="auto">
         <img
           className={blogPostCardStyles.modal__img}
-          src="https://random.imagecdn.app/300/150"
+          src="https://picsum.photos/200"
           alt="img"
         />
       </Modal>
@@ -35,18 +40,14 @@ const BlogPostCard = ({
         <div className={blogPostCardStyles.card__img}>
           <div className={blogPostCardStyles.card__img__overlay}>
             <Indicator
-              label={"Category"}
-              color={indicatorColor}
+              label={category === "turkey" ? "Türkiye" : "Dünya"}
+              color={randomColor}
               inline
               size={20}
               radius={9}
               withBorder
             >
-              <img
-                src="https://random.imagecdn.app/300/150"
-                alt="img"
-                onClick={toggle}
-              />
+              <img src="https://picsum.photos/200" alt="img" onClick={toggle} />
             </Indicator>
           </div>
         </div>
@@ -64,12 +65,7 @@ const BlogPostCard = ({
             weight={500}
           >
             <span style={{ color: "black" }}>{"place"}</span>・
-            {date.toLocaleDateString("tr-TR", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}{" "}
-            tarihinde yayınlandı
+            {formatTimestamp(created)} tarihinde yayınlandı
           </Text>
           <Text lineClamp={1} className={blogPostCardStyles.card__title}>
             {title}
@@ -79,7 +75,9 @@ const BlogPostCard = ({
             <Text
               lineClamp={window.innerWidth <= 576 ? 6 : 4}
               className={blogPostCardStyles.card__text}
-            ></Text>
+            >
+              <div dangerouslySetInnerHTML={{ __html: content }} />
+            </Text>
           </div>
 
           <div className={blogPostCardStyles.card__btn__overlay}>

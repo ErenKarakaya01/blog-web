@@ -1,10 +1,14 @@
-import { Divider, TextInput, Textarea } from "@mantine/core"
+import { Button, Divider, TextInput, Textarea } from "@mantine/core"
 import Layout from "../layouts/Layout"
 import homeStyles from "../sass/home.module.scss"
 import PostFormLayoutStyles from "../sass/postFormLayout.module.scss"
-import { useState } from "react"
+import { MouseEventHandler, useEffect, useState } from "react"
 import StyledDropzone from "./../components/StyledDropzone"
 import RightBar from "./../components/RightBar"
+import useStorage from "../hooks/useStorage"
+import { doc, updateDoc } from "firebase/firestore"
+import { db } from "../firebase/firebase"
+import { showSuccess } from "../core/utils/notifications"
 
 const UpdateRight = () => {
   const [img, setImg] = useState<File | null>(null)
@@ -12,6 +16,7 @@ const UpdateRight = () => {
     title: "",
     text: "",
   })
+  const { url } = useStorage(img)
 
   const handleChange: React.ChangeEventHandler<
     HTMLTextAreaElement | HTMLInputElement
@@ -19,9 +24,21 @@ const UpdateRight = () => {
     setAttributes({ ...attributes, [e.target.name]: e.target.value })
   }
 
+  const handleSubmit: MouseEventHandler<HTMLButtonElement> = async (e) => {
+    e.preventDefault()
+
+    await updateDoc(doc(db, "right", "QqNMHcZxYHgWOykUiYkd"), {
+      title: attributes.title,
+      description: attributes.text,
+      img: url,
+    })
+
+    showSuccess("Başarıyla güncellendi")
+  }
+
   return (
     <Layout>
-      <div className={homeStyles.content}>
+      <form className={homeStyles.content}>
         <div className={PostFormLayoutStyles.container}>
           <StyledDropzone setImg={setImg} />
 
@@ -53,15 +70,18 @@ const UpdateRight = () => {
           />
 
           <Divider style={{ margin: "1em 0" }} />
+
+          <Button
+            fullWidth
+            variant="filled"
+            color="green"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            Kaydet
+          </Button>
         </div>
-      </div>
-      <RightBar
-        imgUrl={
-          img ? URL.createObjectURL(img) : "https://picsum.photos/1000/1000"
-        }
-        title={attributes.title}
-        text={attributes.text}
-      />
+      </form>
     </Layout>
   )
 }

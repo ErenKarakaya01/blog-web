@@ -2,6 +2,7 @@ import { Card, Image, Text } from "@mantine/core"
 import homeStyles from "../sass/home.module.scss"
 import { Divider } from "@mui/material"
 import Recommended from "./Recommended"
+import RightBarSkeleton from './skeletons/RightBarSkeleton'
 
 const RightBar = ({
   imgUrl,
@@ -20,6 +21,7 @@ const RightBar = ({
             src={imgUrl}
             className={homeStyles.image}
             alt="No way!"
+            radius={10}
           />
         </Card.Section>
 
@@ -34,7 +36,7 @@ const RightBar = ({
 
       <Divider className={homeStyles.divider} />
 
-      <Recommended posts={[]} />
+      <Recommended />
     </div>
   )
 }

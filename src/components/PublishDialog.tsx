@@ -9,7 +9,7 @@ import { Timestamp, addDoc, doc, updateDoc } from "firebase/firestore"
 import firebase, { db } from "../firebase/firebase"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { postCollection } from "../firebase/firebase"
-import { showError } from "../core/utils/notifications"
+import { showError, showSuccess } from "../core/utils/notifications"
 import { resetPost, setTitle } from "../redux/post/postSlice"
 import { useNavigate } from "react-router-dom"
 
@@ -30,7 +30,7 @@ const PublishDialog = ({
     setOpen(false)
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (
       !post.title ||
       !post.category ||
@@ -44,17 +44,19 @@ const PublishDialog = ({
       ...post,
       title: post.title.toLowerCase(),
       category: post.category.toLowerCase(),
-      created: Timestamp.fromDate(new Date()),
+      created: Timestamp.now(),
     }
 
     try {
       if (id) {
-        updateDoc(doc(db, "posts", id), postObj)
+        await updateDoc(doc(db, "posts", id), postObj)
+        showSuccess("Yazı başarıyla güncellendi.")
       } else {
-        addDoc(postCollection, postObj)
+        await addDoc(postCollection, postObj)
+        showSuccess("Yazı başarıyla paylaşıldı.")
       }
     } catch (error) {
-      console.log(error)
+      showError("Yazı paylaşılırken bir hata oluştu.")
     } finally {
       dispatch(resetPost())
       setOpen(false)
@@ -71,7 +73,7 @@ const PublishDialog = ({
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {"Paylaşma İşlemi"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

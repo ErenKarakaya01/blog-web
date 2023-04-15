@@ -131,10 +131,7 @@
           margin-bottom: 0.5rem;
           text-decoration: none;
           transition: color 0.2s;
-
-          &:hover {
-            color: #0073b1;
-          }
+          overflow: hidden;
         }
 
         .time {

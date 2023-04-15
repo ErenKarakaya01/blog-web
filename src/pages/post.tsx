@@ -13,23 +13,17 @@ import { useNavigate, useParams } from "react-router-dom"
 import { doc, getDoc } from "firebase/firestore"
 import { db } from "../firebase/firebase"
 import usePost from "../hooks/usePost"
+import PostSkeleton from "../components/skeletons/PostSkeleton"
 
 const Post = () => {
   const { id } = useParams()
-  const post = usePost(id)
+  const { post, loading } = usePost(id)
 
   return (
     <Layout>
       <LeftBar />
 
-      <PostView {...post} />
-
-      <RightBar
-        imgUrl="https://picsum.photos/1000/1000"
-        title="You've won a million dollars in cash!"
-        text="Please click anywhere on this card to claim your reward, this is not a
-        fraud, trust us"
-      />
+      {loading ? <PostSkeleton /> : <PostView {...post} />}
     </Layout>
   )
 }

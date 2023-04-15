@@ -22,5 +22,8 @@ export const db = getFirestore(app)
 
 // post collection reference
 export const postCollection = collection(db, "posts")
+export const commentCollection = collection(db, "comments")
+export const likeCollection = collection(db, "likes")
+export const rightCollection = collection(db, "right")
 
 export default app

@@ -9,6 +9,7 @@ import {
   useMantineTheme,
 } from "@mantine/core"
 import usePosts from "../hooks/usePosts"
+import CarouselSkeleton from "./skeletons/CarouselSkeleton"
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -28,6 +29,7 @@ const useStyles = createStyles((theme) => ({
     lineHeight: 1.2,
     fontSize: 32,
     marginTop: theme.spacing.xs,
+    wordBreak: "break-word",
   },
 
   category: {
@@ -59,7 +61,7 @@ function Card({ image, title, category }: CardProps) {
         <Text className={classes.category} size="xs">
           {category}
         </Text>
-        <Title order={3} className={classes.title}>
+        <Title order={3} className={classes.title} lineClamp={3}>
           {title}
         </Title>
       </div>
@@ -78,26 +80,32 @@ interface DataItem {
 }
 
 const CardsCarousel = () => {
-  const data = usePosts({ num: 10 })
+  const { posts, loading } = usePosts({ num: 10 })
   const theme = useMantineTheme()
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
-  const slides = data.map((item: DataItem) => (
+  const slides = posts?.map((item: DataItem) => (
     <Carousel.Slide key={item.id}>
-      <Card {...{...item, image: item.images[0]}} />
+      <Card {...{ ...item, image: item.images[0] }} />
     </Carousel.Slide>
   ))
 
   return (
-    <Carousel
-      slideSize="40%"
-      breakpoints={[{ maxWidth: "sm", slideSize: "100%", slideGap: 2 }]}
-      slideGap={mobile ? 2 : 4}
-      loop
-      align="start"
-      slidesToScroll={mobile ? 1 : 2}
-    >
-      {slides}
-    </Carousel>
+    <>
+      {loading ? (
+        <CarouselSkeleton />
+      ) : (
+        <Carousel
+          slideSize="40%"
+          breakpoints={[{ maxWidth: "sm", slideSize: "100%", slideGap: 2 }]}
+          slideGap={mobile ? 2 : 4}
+          loop
+          align="start"
+          slidesToScroll={mobile ? 1 : 2}
+        >
+          {slides}
+        </Carousel>
+      )}
+    </>
   )
 }
 

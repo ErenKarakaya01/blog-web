@@ -79,8 +79,8 @@ const PostFormLayout = ({ id }: { id?: string }) => {
         <Select
           label="Kategori"
           data={[
-            { value: "türkiye", label: "Türkiye" },
-            { value: "dünya", label: "Dünya" },
+            { value: "turkey", label: "Türkiye" },
+            { value: "world", label: "Dünya" },
           ]}
           description="Dünya, Türkiye"
           placeholder="Kategori seçiniz"
