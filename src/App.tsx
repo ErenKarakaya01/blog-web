@@ -17,6 +17,7 @@ import ProtectedLayout from "./layouts/ProtectedLayout"
 import { useAppDispatch } from "./redux/hooks"
 import { setUser } from "./redux/user/userSlice"
 import isAdmin from "./utils/isAdmin"
+import Search from './pages/search'
 
 interface Page {
   path: string

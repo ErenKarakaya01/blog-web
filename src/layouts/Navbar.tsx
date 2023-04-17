@@ -25,6 +25,9 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import { NavLink, useNavigate } from "react-router-dom"
 import { signOut } from "firebase/auth"
 import { auth } from "../firebase/firebase"
+import { IconSearch } from "@tabler/icons-react"
+import { IconButton } from "@mui/material"
+import SearchModal from "../components/SearchModal"
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -132,6 +135,7 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
   const { classes, cx } = useStyles()
   const [userMenuOpened, setUserMenuOpened] = useState(false)
   const navigate = useNavigate()
+  const [searchModalOpened, searchModal] = useDisclosure(false)
 
   const items = links.map((link) => (
     <NavLink
@@ -165,6 +169,9 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
       >
         <Group className={classes.modal} spacing={5}>
           {items}
+          <IconButton onClick={searchModal.toggle}>
+            <IconSearch />
+          </IconButton>
         </Group>
       </Drawer>
 
@@ -239,6 +246,9 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
 
         <Group className={classes.links} spacing={5}>
           {items}
+          <IconButton onClick={searchModal.toggle}>
+            <IconSearch />
+          </IconButton>
         </Group>
 
         <Group spacing={0} className={classes.social} position="right" noWrap>
@@ -250,6 +260,8 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
           </ActionIcon>
         </Group>
       </Container>
+
+      <SearchModal opened={searchModalOpened} toggle={searchModal.toggle} />
     </Header>
   )
 }

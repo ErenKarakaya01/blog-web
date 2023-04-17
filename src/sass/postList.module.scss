@@ -12,6 +12,7 @@
     padding: 1em;
     border-radius: 1em;
     width: 95%;
+    overflow: hidden;
 
     &:hover {
       background-color: rgba(248, 248, 248, 0.818);
@@ -19,6 +20,8 @@
 
     .post_title {
       text-align: center;
+      max-width: 400px;
+      overflow: hidden;
     }
 
     .post_buttons {

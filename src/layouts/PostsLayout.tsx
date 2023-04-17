@@ -18,6 +18,7 @@ interface Post {
     nanoseconds: number
   }
   category: string
+  place: string
 }
 
 const PostsLayout = ({
@@ -41,7 +42,9 @@ const PostsLayout = ({
         <div className={homeStyles.blog__posts}>
           {loading ? (
             <PostCardSkeleton />
-          ) : (
+          ) : !loading && posts.length === 0 ? (
+            <p>Bu konuda yazı bulunamadı.</p>
+          ) : !loading ? (
             posts?.map((post: Post) => (
               <BlogPostCard
                 key={post.id}
@@ -50,9 +53,10 @@ const PostsLayout = ({
                 title={post.title}
                 content={post.content}
                 category={post.category}
+                place={post.place}
               />
             ))
-          )}
+          ) : null}
         </div>
       </div>
     </Layout>

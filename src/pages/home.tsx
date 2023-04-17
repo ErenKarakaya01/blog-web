@@ -6,9 +6,12 @@ import BlogPostCard from "./../components/BlogPostCard"
 import CardsCarousel from "../components/Carousel"
 import { faker } from "@faker-js/faker"
 import PostsLayout from "../layouts/PostsLayout"
+import { useSearchParams } from 'react-router-dom'
 
 const Home = () => {
-  return <PostsLayout />
+  const [searchParams] = useSearchParams()
+
+  return <PostsLayout title={searchParams.get("title")} />
 }
 
 export default Home

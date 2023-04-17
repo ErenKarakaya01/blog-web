@@ -12,6 +12,7 @@ const BlogPostCard = ({
   title,
   content,
   category,
+  place,
 }: {
   id: string
   created: {
@@ -21,6 +22,7 @@ const BlogPostCard = ({
   title: string
   content: string
   category: string
+  place: string
 }) => {
   const [opened, { toggle }] = useDisclosure(false)
   const navigate = useNavigate()
@@ -64,7 +66,7 @@ const BlogPostCard = ({
             size="sm"
             weight={500}
           >
-            <span style={{ color: "black" }}>{"place"}</span>・
+            <span style={{ color: "black", textTransform: "capitalize" }}>{place}</span>・
             {formatTimestamp(created)} tarihinde yayınlandı
           </Text>
           <Text lineClamp={1} className={blogPostCardStyles.card__title}>
