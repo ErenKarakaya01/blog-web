@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode, useState } from "react"
 import Navbar from "../layouts/Navbar"
 import { Affix, Button, Divider, ScrollArea, Transition } from "@mantine/core"
 import homeStyles from "../sass/home.module.scss"
@@ -16,35 +16,35 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks"
 const Layout = ({ children }: { children: ReactNode }) => {
   const { right, loading } = useRightBar()
   const { user } = useAppSelector((state) => state.user)
+  const [scrollPosition, onScrollPositionChange] = useState({ x: 0, y: 0 });
 
   return (
-    <ScrollArea className={homeStyles.container}>
+    <>
       <Navbar
         links={[
           { link: "/category/turkey", label: "Türkiye" },
           { link: "/category/world", label: "Dünya" },
         ]}
-        user={{
-          name: "Eren",
-          image: user ? user.photoURL : "",
-        }}
+        user={user}
+        scrollPosition={scrollPosition}
       />
+      <ScrollArea className={homeStyles.container} onScrollPositionChange={onScrollPositionChange}>
+        <div className={homeStyles.content_outline}>
+          {children}
+          {loading ? (
+            <RightBarSkeleton />
+          ) : (
+            <RightBar
+              imgUrl={right.img}
+              title={right.title}
+              text={right.description}
+            />
+          )}
+        </div>
 
-      <div className={homeStyles.content_outline}>
-        {children}
-        {loading ? (
-          <RightBarSkeleton />
-        ) : (
-          <RightBar
-            imgUrl={right.img}
-            title={right.title}
-            text={right.description}
-          />
-        )}
-      </div>
-
-      <Footer />
-    </ScrollArea>
+        <Footer />
+      </ScrollArea>
+    </>
   )
 }
 

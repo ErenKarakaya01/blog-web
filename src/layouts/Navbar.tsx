@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
   createStyles,
   Header,
@@ -25,9 +25,15 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import { NavLink, useNavigate } from "react-router-dom"
 import { signOut } from "firebase/auth"
 import { auth } from "../firebase/firebase"
-import { IconSearch } from "@tabler/icons-react"
+import {
+  IconSearch,
+  IconCirclePlus,
+  IconClipboardText,
+  IconLayoutSidebarRight,
+} from "@tabler/icons-react"
 import { IconButton } from "@mui/material"
 import SearchModal from "../components/SearchModal"
+import homeStyles from "../sass/home.module.scss"
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -50,6 +56,7 @@ const useStyles = createStyles((theme) => ({
   modal: {
     display: "flex",
     flexDirection: "column",
+    marginTop: "100px",
   },
 
   modalLinks: {
@@ -126,11 +133,28 @@ const useStyles = createStyles((theme) => ({
 }))
 
 interface HeaderMiddleProps {
-  user: { name: string; image: string }
+  user:
+    | false
+    | {
+        uid: string
+        email: string
+        displayName: string
+        photoURL: string
+        admin: boolean
+      }
+    | null
   links: { link: string; label: string }[]
+  scrollPosition: {
+    x: number
+    y: number
+  }
 }
 
-export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
+export default function HeaderMiddle({
+  user,
+  links,
+  scrollPosition,
+}: HeaderMiddleProps) {
   const [opened, { toggle }] = useDisclosure(false)
   const { classes, cx } = useStyles()
   const [userMenuOpened, setUserMenuOpened] = useState(false)
@@ -152,116 +176,156 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
   ))
 
   return (
-    <Header
-      height={56}
-      sx={{
-        position: "sticky",
-        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
-        backgroundColor: "rgba(255, 255, 255, 0.80)",
-        backdropFilter: "blur(10px)",
-      }}
-    >
-      <Drawer
-        style={{ width: "100%" }}
-        opened={opened}
-        onClose={toggle}
-        padding="xl"
+    <>
+      <div
+        className={homeStyles.topbar}
+        style={{
+          display: scrollPosition.y > 56 ? "none" : "flex",
+        }}
       >
-        <Group className={classes.modal} spacing={5}>
-          {items}
-          <IconButton onClick={searchModal.toggle}>
-            <IconSearch />
-          </IconButton>
-        </Group>
-      </Drawer>
+        ESEN BLOG
+      </div>
 
-      <Container className={classes.inner}>
-        <Burger
+      <Header
+        height={56}
+        sx={{
+          position: "sticky",
+          boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
+          backgroundColor: "rgba(255, 255, 255, 0.80)",
+          backdropFilter: "blur(10px)",
+        }}
+      >
+        <Drawer
+          style={{ width: "100%" }}
           opened={opened}
-          onClick={toggle}
-          size="sm"
-          className={classes.burger}
-        />
-
-        <Menu
-          width={260}
-          position="bottom-end"
-          transition="pop-top-right"
-          onClose={() => setUserMenuOpened(false)}
-          onOpen={() => setUserMenuOpened(true)}
+          onClose={toggle}
+          padding="xl"
+          withCloseButton={false}
         >
-          <Menu.Target>
-            <UnstyledButton
-              className={cx(classes.user, {
-                [classes.userActive]: userMenuOpened,
-              })}
-            >
-              <Group spacing={7}>
-                <Avatar
-                  src={user.image}
-                  alt={user.name}
-                  radius="xl"
-                  size={20}
-                />
-                <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-                  {user.name}
-                </Text>
-                <ExpandMoreIcon />
-              </Group>
-            </UnstyledButton>
-          </Menu.Target>
-          <Menu.Dropdown>
-            <Menu.Item icon={<FavoriteIcon />}>Liked posts</Menu.Item>
-            <Menu.Item icon={<StarIcon />}>Saved posts</Menu.Item>
-            <Menu.Item icon={<MessageIcon />}>Your comments</Menu.Item>
+          <Group className={classes.modal} spacing={5}>
+            {items}
+            <IconButton onClick={searchModal.toggle}>
+              <IconSearch />
+            </IconButton>
+          </Group>
+        </Drawer>
 
-            <Menu.Label>Settings</Menu.Label>
-            <Menu.Item icon={<SettingsIcon />}>Account settings</Menu.Item>
-            <Menu.Item icon={<LogoutIcon />}>
-              <div
-                onClick={() => {
-                  signOut(auth)
-                    .then(() => {
-                      // Sign-out successful.
-                      navigate("/login")
-                    })
-                    .catch((error) => {
-                      // An error happened.
-                      console.log(error)
-                    })
-                }}
+        <Container className={classes.inner}>
+          <Burger
+            opened={opened}
+            onClick={toggle}
+            size="sm"
+            className={classes.burger}
+          />
+
+          <Menu
+            width={260}
+            position="bottom-end"
+            transition="pop-top-right"
+            onClose={() => setUserMenuOpened(false)}
+            onOpen={() => setUserMenuOpened(true)}
+          >
+            <Menu.Target>
+              <UnstyledButton
+                className={cx(classes.user, {
+                  [classes.userActive]: userMenuOpened,
+                })}
               >
-                Logout
-              </div>
-            </Menu.Item>
+                <Group spacing={7}>
+                  <Avatar
+                    src={user ? user.photoURL : ""}
+                    alt={user ? user.email : ""}
+                    radius="xl"
+                    size={20}
+                  />
+                  <Text
+                    weight={500}
+                    size="sm"
+                    mr={3}
+                    sx={{
+                      maxWidth: "100px",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {user ? user.email : "Kullanıcı"}
+                  </Text>
+                  <ExpandMoreIcon />
+                </Group>
+              </UnstyledButton>
+            </Menu.Target>
+            <Menu.Dropdown>
+              {!user && (
+                <>
+                  <Menu.Label>Kullanıcı</Menu.Label>
+                  <Menu.Item icon={<LogoutIcon />}>
+                    <div onClick={() => navigate("/login")}>Giriş Yap</div>
+                  </Menu.Item>
+                </>
+              )}
 
-            <Menu.Divider />
+              {user && (
+                <>
+                  <Menu.Label>Kullanıcı</Menu.Label>
+                  <Menu.Item icon={<LogoutIcon />}>
+                    <div
+                      onClick={() => {
+                        signOut(auth)
+                          .then(() => {
+                            // Sign-out successful.
+                            navigate("/login")
+                          })
+                          .catch((error) => {
+                            // An error happened.
+                            console.log(error)
+                          })
+                      }}
+                    >
+                      Çıkış Yap
+                    </div>
+                  </Menu.Item>
+                </>
+              )}
 
-            <Menu.Label>Danger zone</Menu.Label>
-            <Menu.Item color="red" icon={<DeleteIcon />}>
-              Delete account
-            </Menu.Item>
-          </Menu.Dropdown>
-        </Menu>
+              {user && user.admin && (
+                <>
+                  <Menu.Divider />
+                  <Menu.Label>Admin</Menu.Label>
 
-        <Group className={classes.links} spacing={5}>
-          {items}
-          <IconButton onClick={searchModal.toggle}>
-            <IconSearch />
-          </IconButton>
-        </Group>
+                  <Menu.Item icon={<IconCirclePlus />}>
+                    <div onClick={() => navigate("/add-post")}>Yazı Ekle</div>
+                  </Menu.Item>
+                  <Menu.Item icon={<IconClipboardText />}>
+                    <div onClick={() => navigate("/admin-posts")}>Yazılar</div>
+                  </Menu.Item>
+                  <Menu.Item icon={<IconLayoutSidebarRight />}>
+                    <div onClick={() => navigate("/update-right")}>
+                      Sağ Menü
+                    </div>
+                  </Menu.Item>
+                </>
+              )}
+            </Menu.Dropdown>
+          </Menu>
 
-        <Group spacing={0} className={classes.social} position="right" noWrap>
-          <ActionIcon size="lg">
-            <TwitterIcon />
-          </ActionIcon>
-          <ActionIcon size="lg">
-            <InstagramIcon />
-          </ActionIcon>
-        </Group>
-      </Container>
+          <Group className={classes.links} spacing={5}>
+            {items}
+            <IconButton onClick={searchModal.toggle}>
+              <IconSearch />
+            </IconButton>
+          </Group>
 
-      <SearchModal opened={searchModalOpened} toggle={searchModal.toggle} />
-    </Header>
+          <Group spacing={0} className={classes.social} position="right" noWrap>
+            <ActionIcon size="lg">
+              <TwitterIcon />
+            </ActionIcon>
+            <ActionIcon size="lg">
+              <InstagramIcon />
+            </ActionIcon>
+          </Group>
+        </Container>
+
+        <SearchModal opened={searchModalOpened} toggle={searchModal.toggle} />
+      </Header>
+    </>
   )
 }

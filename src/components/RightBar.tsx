@@ -15,15 +15,17 @@ const RightBar = ({
 }) => {
   return (
     <div className={homeStyles.right_outline}>
-      <Card shadow="sm" p={10} className={homeStyles.right_bar} radius={10}>
-        <Card.Section withBorder pb="xs">
+      <Card shadow="sm" p={10} className={homeStyles.right_bar}>
+        <Card.Section p={10}>
           <Image
             src={imgUrl}
             className={homeStyles.image}
             alt="No way!"
-            radius={10}
+            radius={4}
           />
         </Card.Section>
+
+        <Divider className={homeStyles.divider} />
 
         <Text weight={500} size="lg" mt="md">
           {title}

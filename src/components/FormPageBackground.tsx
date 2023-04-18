@@ -1,5 +1,6 @@
 import { Group, Grid, Col, Paper } from "@mantine/core"
 import formStyles from "../sass/form.module.scss"
+import "../assets/images/1.jpg"
 
 const FormPageBackground = () => {
   return (
@@ -11,7 +12,7 @@ const FormPageBackground = () => {
             className={formStyles.paper}
           >
             <img
-              src="/images/beyaz5.jpg"
+              src={require("../assets/images/5.jpg")}
               alt="beyaz5"
               className={formStyles.image}
             />
@@ -21,7 +22,7 @@ const FormPageBackground = () => {
             className={formStyles.paper}
           >
             <img
-              src="/images/beyaz2.jpg"
+              src={require("../assets/images/2.jpg")}
               alt="beyaz2"
               className={formStyles.image}
             />
@@ -35,7 +36,7 @@ const FormPageBackground = () => {
             className={formStyles.paper}
           >
             <img
-              src="/images/beyaz3.jpg"
+              src={require("../assets/images/3.jpg")}
               alt="beyaz3"
               className={formStyles.image}
             />
@@ -45,7 +46,7 @@ const FormPageBackground = () => {
             className={formStyles.paper}
           >
             <img
-              src="/images/beyaz4.jpg"
+              src={require("../assets/images/4.jpg")}
               alt="beyaz4"
               className={formStyles.image}
             />
@@ -59,7 +60,7 @@ const FormPageBackground = () => {
             className={formStyles.paper}
           >
             <img
-              src="/images/beyaz1.jpg"
+              src={require("../assets/images/1.jpg")}
               alt="beyaz1"
               className={formStyles.image}
             />
@@ -69,7 +70,7 @@ const FormPageBackground = () => {
             className={formStyles.paper}
           >
             <img
-              src="/images/beyaz6.jpg"
+              src={require("../assets/images/6.jpg")}
               alt="beyaz6"
               className={formStyles.image}
             />

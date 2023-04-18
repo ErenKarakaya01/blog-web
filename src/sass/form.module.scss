@@ -11,8 +11,20 @@
     margin-left: auto;
     margin-right: 4em;
 
+    @media screen and (max-width: 50em) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: none;
+      margin-right: none;
+    }
+
     .divider {
       margin-right: 2.5em;
+
+      @media screen and (max-width: 50em) {
+        display: none;
+      }
 
       .chip {
         width: 6em;
@@ -59,11 +71,11 @@
       z-index: -1;
       position: relative;
       left: 7rem;
-  
+
       .paper {
         border-radius: 0;
         box-shadow: 0.5em 0.5em 0.5em rgba(101, 101, 101, 0.685);
-  
+
         .image {
           padding: 1em 1em 2em 1em;
         }
@@ -80,6 +92,10 @@
   position: absolute;
   overflow: hidden;
 
+  @media screen and (max-width: 50em) {
+    display: none;
+  }
+
   .background {
     width: 80%;
     z-index: -1;
@@ -92,6 +108,9 @@
 
       .image {
         padding: 1em 1em 2em 1em;
+        width: 200px;
+        object-fit: cover;
+        max-height: 400px;
       }
     }
   }

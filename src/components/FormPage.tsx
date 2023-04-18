@@ -1,6 +1,6 @@
 import formStyles from "../sass/form.module.scss"
 import { Grid, Col, Center, Stack } from "@mantine/core"
-import { Divider, Chip } from "@mui/material"
+import { Divider, Chip, useMediaQuery } from "@mui/material"
 import FormPageBackground from "./FormPageBackground"
 import { FC } from "react"
 
@@ -13,12 +13,14 @@ const FormPage = ({
   image: string
   dividerText: string
 }) => {
+  const isMobile = useMediaQuery("(max-width: 50em)")
+
   return (
     <Grid columns={24} className={formStyles.grid}>
-      <Col span={18} className={formStyles.backgroundCol}>
+      <Col span={isMobile ? 0 : 18} className={formStyles.backgroundCol}>
         <FormPageBackground />
       </Col>
-      <Col span={6} className={formStyles.col}>
+      <Col span={isMobile ? 24 : 6} className={formStyles.col}>
         <Center className={formStyles.center}>
           <Divider
             orientation="vertical"
@@ -29,7 +31,7 @@ const FormPage = ({
           </Divider>
           <Stack className={formStyles.inputs}>
             <Center className={formStyles.image}>
-              <img src={image} alt="nextjs" />
+              <img src={require("../assets/images/user.png")} alt="nextjs" />
             </Center>
             <Form />
           </Stack>

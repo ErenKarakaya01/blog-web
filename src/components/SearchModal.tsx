@@ -1,9 +1,9 @@
 import { Button, Modal, TextInput, useMantineTheme } from "@mantine/core"
 import { useMediaQuery } from "@mui/material"
-import { IconSearch } from '@tabler/icons-react'
+import { IconSearch } from "@tabler/icons-react"
 import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search"
 
 const SearchModal = ({
   opened,
@@ -19,7 +19,7 @@ const SearchModal = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
+
     toggle()
 
     navigate(`/?title=${search}`)
@@ -30,7 +30,12 @@ const SearchModal = ({
       opened={opened}
       onClose={toggle}
       fullScreen={isMobile}
-      sx={{ transition: "fade", duration: 200, marginTop: "4rem" }}
+      sx={{
+        transition: "fade",
+        duration: 200,
+        marginTop: "200px",
+        maxHeight: "300px",
+      }}
       overlayBlur={isMobile ? 0 : 3}
       overlayColor={
         theme.colorScheme === "dark"

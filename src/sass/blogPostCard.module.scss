@@ -128,6 +128,10 @@
           display: none;
         }
 
+        p, h1, h2, h3, h4, h5, h6, ul, ol, li, blockquote, pre, code, table, form, fieldset, address, dl, dt, dd, figure, hr, div {
+          margin: 0;
+        }
+
         @media screen and (max-width: 576px) {
           width: 80%;
           position: absolute;

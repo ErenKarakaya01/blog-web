@@ -35,14 +35,15 @@ const usePosts = ({
   if (title)
     constraints.push(
       where("title", ">=", startcode),
-      where("title", "<", endcode)
+      where("title", "<", endcode),
+      orderBy("title", "desc")
     )
   if (category)
     constraints.push(where("category", "==", category.toLowerCase()))
   if (num) constraints.push(limit(num))
 
   // prepare query
-  const q = query(postCollection, ...constraints, orderBy("title", "desc"))
+  const q = query(postCollection, ...constraints, orderBy("created", "desc"))
 
   useEffect(() => {
     getDocs(q).then((snapshot) => {

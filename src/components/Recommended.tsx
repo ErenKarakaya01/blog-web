@@ -31,16 +31,6 @@ const Recommended = () => {
               className={homeStyles.recommended_post}
               key={post.id}
             >
-              <div className={homeStyles.recommended_post_tags}>
-                <Avatar.Group spacing="sm" mx={20}>
-                  {post.tags.map((tag) => (
-                    <Fragment key={tag}>
-                      <Badge color={getRandomColor()}>#{tag}</Badge>
-                    </Fragment>
-                  ))}
-                </Avatar.Group>
-              </div>
-
               <Text
                 className={homeStyles.recommended_text}
                 weight={500}
@@ -50,6 +40,16 @@ const Recommended = () => {
               >
                 {post.title}
               </Text>
+              
+              <div className={homeStyles.recommended_post_tags}>
+                <Avatar.Group spacing="sm" mx={20}>
+                  {post.tags.map((tag) => (
+                    <Fragment key={tag}>
+                      <Badge color={getRandomColor()}>#{tag}</Badge>
+                    </Fragment>
+                  ))}
+                </Avatar.Group>
+              </div>
             </Link>
           ))}
       </Card.Section>
