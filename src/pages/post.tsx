@@ -4,6 +4,7 @@ import PostView from "../components/PostView"
 import { useParams } from "react-router-dom"
 import usePost from "../hooks/usePost"
 import PostSkeleton from "../components/skeletons/PostSkeleton"
+import Comments from '../components/Comments'
 
 const Post = () => {
   const { id } = useParams()
@@ -13,7 +14,14 @@ const Post = () => {
     <Layout>
       <LeftBar />
 
-      {loading ? <PostSkeleton /> : <PostView {...post} />}
+      {loading ? (
+        <PostSkeleton />
+      ) : (
+        <>
+          <PostView {...post} />
+          <Comments />
+        </>
+      )}
     </Layout>
   )
 }

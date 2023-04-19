@@ -11,7 +11,6 @@ import PostFormLayoutStyles from "../sass/postFormLayout.module.scss"
 import { Text } from "@mantine/core"
 import "../sass/global.css"
 import CardsCarousel from "./Carousel"
-import Comments from "./Comments"
 import getRandomColor from "../utils/getRandomColor"
 import React, { Fragment } from "react"
 import formatTimestamp from "../utils/formatTimestamp"
@@ -117,8 +116,6 @@ const PostView = ({
       </div>
 
       <Divider className={homeStyles.divider} />
-
-      <Comments />
     </div>
   )
 }
