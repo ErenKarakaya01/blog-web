@@ -9,9 +9,9 @@ const AdminPosts = () => {
 
   return (
     <Layout>
-      <div className={homeStyles.content}>
+      {/* <div className={homeStyles.content}>
         <PostList posts={posts} />
-      </div>
+      </div> */}
     </Layout>
   )
 }
