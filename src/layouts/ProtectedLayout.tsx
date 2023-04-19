@@ -12,7 +12,7 @@ const ProtectedLayout = ({
   const { user } = useAppSelector((state) => state.user)
 
   // user in redux store is null when it's still loading
-  /* if (user === null) return <Loading />
+  if (user === null) return <Loading />
   // user in redux store is false when user is not logged in
   else if (!user && condition === "authenticated")
     return <Navigate to="/login" />
@@ -20,7 +20,7 @@ const ProtectedLayout = ({
   else if (user && condition === "unauthenticated") return <Navigate to="/" />
   // user in redux store is an object when user is logged in
   else if ((!user || !user.admin) && condition === "admin")
-    return <Navigate to="/" /> */
+    return <Navigate to="/" />
 
   return <>{children}</>
 }

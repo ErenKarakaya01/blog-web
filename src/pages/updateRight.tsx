@@ -10,7 +10,7 @@ import { db } from "../firebase/firebase"
 import { showSuccess } from "../core/utils/notifications"
 
 const UpdateRight = () => {
-  /* const [img, setImg] = useState<File | null>(null)
+  const [img, setImg] = useState<File | null>(null)
   const [attributes, setAttributes] = useState({
     title: "",
     text: "",
@@ -81,10 +81,8 @@ const UpdateRight = () => {
           </Button>
         </div>
       </form>
-    </Layout> 
-  )*/
-
-  return <div>gdsa</div>
+    </Layout>
+  )
 }
 
 export default UpdateRight

@@ -26,7 +26,7 @@ const App = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    /* const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(
           setUser({
@@ -46,7 +46,7 @@ const App = () => {
 
     return () => {
       unsubscribe()
-    } */
+    }
   }, [])
 
   const pages: Page[] = [
@@ -102,7 +102,6 @@ const App = () => {
     }))
   )
 
-  /* return <div className="App">{element}</div> */
-  return <div>sdg</div>
+  return <div className="App">{element}</div>
 }
 export default App

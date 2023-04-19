@@ -6,7 +6,7 @@ import usePost from "../hooks/usePost"
 import PostSkeleton from "../components/skeletons/PostSkeleton"
 
 const Post = () => {
-  /* const { id } = useParams()
+  const { id } = useParams()
   const { post, loading } = usePost(id)
 
   return (
@@ -15,9 +15,7 @@ const Post = () => {
 
       {loading ? <PostSkeleton /> : <PostView {...post} />}
     </Layout>
-  ) */
-
-  return <div>gsd</div>
+  )
 }
 
 export default Post
