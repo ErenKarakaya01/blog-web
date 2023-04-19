@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Layout from "./Layout"
-import {
-  Divider,
-  MultiSelect,
-  Select,
-  TextInput,
-} from "@mantine/core"
+import { Divider, MultiSelect, Select, TextInput } from "@mantine/core"
 import StyledTextEditorv2 from "../components/StyledTextEditor"
 import "../sass/global.css"
 import BasicSpeedDial from "./../components/BasicSpeedDial"
@@ -17,7 +12,7 @@ import {
   setTags,
   setContent,
   resetPost,
-  setImages
+  setImages,
 } from "../redux/post/postSlice"
 import homeStyles from "../sass/home.module.scss"
 import { doc, getDoc } from "firebase/firestore"
@@ -48,7 +43,7 @@ const PostFormLayout = ({ id }: { id?: string }) => {
         if (!snapshot.exists()) {
           return navigate("/404")
         }
-        
+
         dispatch(setTitle(snapshot.data()?.title))
         dispatch(setCategory(snapshot.data()?.category))
         dispatch(setPlace(snapshot.data()?.place))
@@ -56,6 +51,10 @@ const PostFormLayout = ({ id }: { id?: string }) => {
         dispatch(setContent(snapshot.data()?.content))
         dispatch(setImages(snapshot.data()?.images))
       })
+    }
+
+    return () => {
+      dispatch(resetPost())
     }
   }, [id])
 
@@ -129,4 +128,3 @@ const PostFormLayout = ({ id }: { id?: string }) => {
 }
 
 export default PostFormLayout
-

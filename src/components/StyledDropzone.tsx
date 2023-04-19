@@ -10,7 +10,6 @@ const StyledDropzone = ({ setImg }: { setImg: React.Dispatch<File> }) => {
       onDrop={(files) => {
         setImg(files[0])
         showLoading("Resim yükleniyor")
-        console.log(files[0])
       }}
       onReject={(files) => {
         showError("Resim yüklenemedi")

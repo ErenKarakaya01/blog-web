@@ -17,6 +17,7 @@ interface Post {
   }
   category: string
   place: string
+  images: string[]
 }
 
 const PostsLayout = ({
@@ -52,6 +53,7 @@ const PostsLayout = ({
                 content={post.content}
                 category={post.category}
                 place={post.place}
+                image={post.images[0]}
               />
             ))
           ) : null}

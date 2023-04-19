@@ -29,8 +29,7 @@ const useComments = (id: string | undefined) => {
         author: doc.data().author,
         created: doc.data().created,
       }))
-      console.log(comments)
-      console.log(id)
+
       setComments(comments)
       setLoading(false)
     })

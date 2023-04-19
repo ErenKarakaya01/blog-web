@@ -13,6 +13,7 @@ const BlogPostCard = ({
   content,
   category,
   place,
+  image
 }: {
   id: string
   created: {
@@ -23,6 +24,7 @@ const BlogPostCard = ({
   content: string
   category: string
   place: string
+  image: string
 }) => {
   const [opened, { toggle }] = useDisclosure(false)
   const navigate = useNavigate()
@@ -33,7 +35,7 @@ const BlogPostCard = ({
       <Modal opened={opened} onClose={toggle} centered size="auto">
         <img
           className={blogPostCardStyles.modal__img}
-          src="https://picsum.photos/200"
+          src={image}
           alt="img"
         />
       </Modal>
@@ -49,7 +51,7 @@ const BlogPostCard = ({
               radius={9}
               withBorder
             >
-              <img src="https://picsum.photos/200" alt="img" onClick={toggle} />
+              <img src={image} alt="img" onClick={toggle} />
             </Indicator>
           </div>
         </div>

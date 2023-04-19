@@ -67,7 +67,9 @@ const Comments = () => {
           <li key={index}>
             <div className={commentsStyles.avatar}>
               <img
-                src={user ? user.photoURL : "https://picsum.photos/200"}
+                src={
+                  user ? user.photoURL : require("../assets/images/user.png")
+                }
                 alt="Avatar"
               />
             </div>

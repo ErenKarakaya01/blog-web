@@ -203,6 +203,7 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
             transition="pop-top-right"
             onClose={() => setUserMenuOpened(false)}
             onOpen={() => setUserMenuOpened(true)}
+            zIndex={100000000000}
           >
             <Menu.Target>
               <UnstyledButton
