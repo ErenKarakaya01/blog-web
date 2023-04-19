@@ -1,6 +1,5 @@
 import { Group, Grid, Col, Paper } from "@mantine/core"
 import formStyles from "../sass/form.module.scss"
-import "../assets/images/1.jpg"
 
 const FormPageBackground = () => {
   return (

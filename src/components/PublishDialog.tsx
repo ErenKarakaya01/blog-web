@@ -1,4 +1,3 @@
-import { useState } from "react"
 import Button from "@mui/material/Button"
 import Dialog from "@mui/material/Dialog"
 import DialogActions from "@mui/material/DialogActions"
@@ -6,11 +5,11 @@ import DialogContent from "@mui/material/DialogContent"
 import DialogContentText from "@mui/material/DialogContentText"
 import DialogTitle from "@mui/material/DialogTitle"
 import { Timestamp, addDoc, doc, updateDoc } from "firebase/firestore"
-import firebase, { db } from "../firebase/firebase"
+import { db } from "../firebase/firebase"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { postCollection } from "../firebase/firebase"
 import { showError, showSuccess } from "../core/utils/notifications"
-import { resetPost, setTitle } from "../redux/post/postSlice"
+import { resetPost } from "../redux/post/postSlice"
 import { useNavigate } from "react-router-dom"
 
 const PublishDialog = ({
@@ -72,9 +71,7 @@ const PublishDialog = ({
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Paylaşma İşlemi"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Paylaşma İşlemi"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Paylaşmak istediğinize emin misiniz?

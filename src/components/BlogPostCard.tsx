@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react"
+import React, { useMemo } from "react"
 import blogPostCardStyles from "../sass/blogPostCard.module.scss"
 import { Indicator, Modal, Text, useMantineTheme } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"

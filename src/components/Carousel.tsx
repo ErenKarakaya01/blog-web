@@ -10,6 +10,7 @@ import {
 } from "@mantine/core"
 import usePosts from "../hooks/usePosts"
 import CarouselSkeleton from "./skeletons/CarouselSkeleton"
+import { Link } from "react-router-dom"
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -41,12 +42,13 @@ const useStyles = createStyles((theme) => ({
 }))
 
 interface CardProps {
+  id: string
   image: string
   title: string
   category: string
 }
 
-function Card({ image, title, category }: CardProps) {
+function Card({ id, image, title, category }: CardProps) {
   const { classes } = useStyles()
 
   return (
@@ -59,15 +61,17 @@ function Card({ image, title, category }: CardProps) {
     >
       <div>
         <Text className={classes.category} size="xs">
-          {category}
+          {category === "turkey" ? "Türkiye" : "Dünya"}
         </Text>
         <Title order={3} className={classes.title} lineClamp={3}>
           {title}
         </Title>
       </div>
-      <Button variant="white" color="dark">
-        Oku
-      </Button>
+      <Link to={`/post/${id}`}>
+        <Button variant="white" color="dark">
+          Daha Fazla
+        </Button>
+      </Link>
     </Paper>
   )
 }
@@ -80,9 +84,9 @@ interface DataItem {
 }
 
 const CardsCarousel = () => {
-  const { posts, loading } = usePosts({ num: 10 })
   const theme = useMantineTheme()
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
+  const { posts, loading } = usePosts({ num: 10 })
   const slides = posts?.map((item: DataItem) => (
     <Carousel.Slide key={item.id}>
       <Card {...{ ...item, image: item.images[0] }} />

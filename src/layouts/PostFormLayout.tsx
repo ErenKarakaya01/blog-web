@@ -3,12 +3,9 @@ import Layout from "./Layout"
 import {
   Divider,
   MultiSelect,
-  NativeSelect,
   Select,
   TextInput,
 } from "@mantine/core"
-import RichTextEditor from "@mantine/rte"
-import PostFormLayoutStyles from "../sass/postFormLayout.module.scss"
 import StyledTextEditorv2 from "../components/StyledTextEditor"
 import "../sass/global.css"
 import BasicSpeedDial from "./../components/BasicSpeedDial"
@@ -23,7 +20,7 @@ import {
   setImages
 } from "../redux/post/postSlice"
 import homeStyles from "../sass/home.module.scss"
-import { collection, doc, getDoc, getDocs } from "firebase/firestore"
+import { doc, getDoc } from "firebase/firestore"
 import { db } from "../firebase/firebase"
 import { useNavigate } from "react-router-dom"
 

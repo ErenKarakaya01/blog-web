@@ -1,12 +1,7 @@
 import { Group, Text, useMantineTheme } from "@mantine/core"
-import { IconUpload, IconPhoto, IconX, IconCheck } from "@tabler/icons-react"
-import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone"
-import {
-  showSuccess,
-  showError,
-  showWarning,
-  showLoading,
-} from "../core/utils/notifications"
+import { IconUpload, IconPhoto, IconX } from "@tabler/icons-react"
+import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone"
+import { showError, showLoading } from "../core/utils/notifications"
 
 const StyledDropzone = ({ setImg }: { setImg: React.Dispatch<File> }) => {
   const theme = useMantineTheme()

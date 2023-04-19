@@ -1,17 +1,12 @@
-import { useState } from "react"
 import Button from "@mui/material/Button"
 import Dialog from "@mui/material/Dialog"
 import DialogActions from "@mui/material/DialogActions"
 import DialogContent from "@mui/material/DialogContent"
 import DialogContentText from "@mui/material/DialogContentText"
 import DialogTitle from "@mui/material/DialogTitle"
-import { Timestamp, addDoc, deleteDoc, doc, updateDoc } from "firebase/firestore"
-import firebase, { db } from "../firebase/firebase"
-import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { postCollection } from "../firebase/firebase"
+import { deleteDoc, doc } from "firebase/firestore"
+import { db } from "../firebase/firebase"
 import { showError, showSuccess } from "../core/utils/notifications"
-import { resetPost, setTitle } from "../redux/post/postSlice"
-import { useNavigate } from "react-router-dom"
 
 const DeleteDialog = ({
   open,
@@ -44,9 +39,7 @@ const DeleteDialog = ({
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Silme İşlemi"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Silme İşlemi"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Bu yazıyı silmek istediğinize emin misiniz?

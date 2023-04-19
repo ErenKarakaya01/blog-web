@@ -1,11 +1,9 @@
-import React, { useState } from "react"
-import Navbar from "./Navbar"
-import { Divider, ScrollArea } from "@mantine/core"
+import React from "react"
+import { Divider } from "@mantine/core"
 import homeStyles from "../sass/home.module.scss"
 import BlogPostCard from "../components/BlogPostCard"
 import CardsCarousel from "../components/Carousel"
 import Layout from "./Layout"
-import RightBar from "../components/RightBar"
 import usePosts from "../hooks/usePosts"
 import PostCardSkeleton from "../components/skeletons/PostCardSkeleton"
 

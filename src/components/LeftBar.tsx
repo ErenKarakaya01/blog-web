@@ -1,20 +1,16 @@
-import React, { useEffect, useMemo, useState } from "react"
+import React from "react"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import SpeakerNotesIcon from "@mui/icons-material/SpeakerNotes"
 import homeStyles from "../sass/home.module.scss"
 import { IconButton } from "@mui/material"
-import { Indicator } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
 import NeedLoginModal from "./NeedLoginModal"
-import { useAppDispatch, useAppSelector } from "../redux/hooks"
+import { useAppSelector } from "../redux/hooks"
 import {
   addDoc,
   deleteDoc,
   doc,
-  getDocs,
-  query,
-  where,
 } from "firebase/firestore"
 import { db, likeCollection } from "../firebase/firebase"
 import { useParams } from "react-router-dom"

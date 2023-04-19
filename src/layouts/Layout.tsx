@@ -1,17 +1,12 @@
 import React, { ReactNode, useState } from "react"
 import Navbar from "../layouts/Navbar"
-import { Affix, Button, Divider, ScrollArea, Transition } from "@mantine/core"
+import { ScrollArea } from "@mantine/core"
 import homeStyles from "../sass/home.module.scss"
-import BlogPostCard from "./../components/BlogPostCard"
-import CardsCarousel from "../components/Carousel"
-import { faker } from "@faker-js/faker"
-import { useWindowScroll } from "@mantine/hooks"
-import { IconArrowUp } from "@tabler/icons-react"
 import Footer from "./Footer"
 import RightBar from "../components/RightBar"
 import useRightBar from "../hooks/useRightBar"
 import RightBarSkeleton from "../components/skeletons/RightBarSkeleton"
-import { useAppDispatch, useAppSelector } from "../redux/hooks"
+import { useAppSelector } from "../redux/hooks"
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const { right, loading } = useRightBar()

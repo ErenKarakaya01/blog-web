@@ -1,7 +1,6 @@
 import { Button, Group, PasswordInput, TextInput } from "@mantine/core"
 import { useForm, UseFormReturnType } from "@mantine/form"
 import formStyles from "../sass/form.module.scss"
-import { showNotification } from "@mantine/notifications"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../firebase/firebase"
 import { setUser } from "../redux/user/userSlice"

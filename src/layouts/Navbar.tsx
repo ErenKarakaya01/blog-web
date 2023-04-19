@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import {
   createStyles,
   Header,
@@ -15,14 +15,9 @@ import {
 import { useDisclosure } from "@mantine/hooks"
 import TwitterIcon from "@mui/icons-material/Twitter"
 import InstagramIcon from "@mui/icons-material/Instagram"
-import FavoriteIcon from "@mui/icons-material/Favorite"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import LogoutIcon from "@mui/icons-material/Logout"
-import MessageIcon from "@mui/icons-material/Message"
-import SettingsIcon from "@mui/icons-material/Settings"
-import StarIcon from "@mui/icons-material/Star"
-import DeleteIcon from "@mui/icons-material/Delete"
-import { NavLink, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { signOut } from "firebase/auth"
 import { auth } from "../firebase/firebase"
 import {
@@ -183,7 +178,18 @@ export default function HeaderMiddle({
           display: scrollPosition.y > 56 ? "none" : "flex",
         }}
       >
-        ESEN BLOG
+        <Link to="/">
+          <Text
+            variant="gradient"
+            gradient={{ from: "white", to: "white", deg: 45 }}
+            ta="center"
+            fz="xl"
+            fw={700}
+            className={homeStyles.topbarText}
+          >
+            ESEN BLOG
+          </Text>
+        </Link>
       </div>
 
       <Header
@@ -258,7 +264,7 @@ export default function HeaderMiddle({
                 <>
                   <Menu.Label>Kullanıcı</Menu.Label>
                   <Menu.Item icon={<LogoutIcon />}>
-                    <div onClick={() => navigate("/login")}>Giriş Yap</div>
+                    <Link to="/login">Giriş Yap</Link>
                   </Menu.Item>
                 </>
               )}
@@ -292,15 +298,13 @@ export default function HeaderMiddle({
                   <Menu.Label>Admin</Menu.Label>
 
                   <Menu.Item icon={<IconCirclePlus />}>
-                    <div onClick={() => navigate("/add-post")}>Yazı Ekle</div>
+                    <Link to="/add-post">Yeni Yazı</Link>
                   </Menu.Item>
                   <Menu.Item icon={<IconClipboardText />}>
-                    <div onClick={() => navigate("/admin-posts")}>Yazılar</div>
+                    <Link to="/admin-posts">Yazılar</Link>
                   </Menu.Item>
                   <Menu.Item icon={<IconLayoutSidebarRight />}>
-                    <div onClick={() => navigate("/update-right")}>
-                      Sağ Menü
-                    </div>
+                    <Link to="/update-right">Sağ Menü</Link>
                   </Menu.Item>
                 </>
               )}
@@ -315,12 +319,16 @@ export default function HeaderMiddle({
           </Group>
 
           <Group spacing={0} className={classes.social} position="right" noWrap>
-            <ActionIcon size="lg">
-              <TwitterIcon />
-            </ActionIcon>
-            <ActionIcon size="lg">
-              <InstagramIcon />
-            </ActionIcon>
+            <Link to="https://twitter.com/sprinkai0" target="_blank">
+              <ActionIcon size="lg">
+                <TwitterIcon />
+              </ActionIcon>
+            </Link>
+            <Link to="https://www.instagram.com/sprinkai/" target="_blank">
+              <ActionIcon size="lg">
+                <InstagramIcon />
+              </ActionIcon>
+            </Link>
           </Group>
         </Container>
 

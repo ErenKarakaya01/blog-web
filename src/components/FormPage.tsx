@@ -6,11 +6,9 @@ import { FC } from "react"
 
 const FormPage = ({
   Form,
-  image,
   dividerText,
 }: {
   Form: FC
-  image: string
   dividerText: string
 }) => {
   const isMobile = useMediaQuery("(max-width: 50em)")

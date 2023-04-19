@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams } from "react-router-dom"
 import PostsLayout from "../layouts/PostsLayout"
 
 const Search = () => {

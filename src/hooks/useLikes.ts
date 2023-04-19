@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { likeCollection } from "../firebase/firebase"
 import { getCountFromServer, getDocs, query, where } from "firebase/firestore"
 import { useDisclosure } from "@mantine/hooks"

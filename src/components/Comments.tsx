@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useState } from "react"
 import commentsStyles from "../sass/comments.module.scss"
 import { useAppSelector } from "../redux/hooks"
 import { useDisclosure } from "@mantine/hooks"
@@ -46,7 +46,7 @@ const Comments = () => {
           <input
             id="new-comment"
             type="text"
-            placeholder="Write your comment here"
+            placeholder="Yorumunuzu buraya yazın..."
             value={newComment}
             onChange={(event) => setNewComment(event.target.value)}
             onFocusCapture={(event) => {

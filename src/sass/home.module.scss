@@ -5,20 +5,27 @@
 
 .topbar {
   display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 56px;
-    width: 100vw;
-    background-color: #228BE6;
-    color: white;
-    font-size: 3em;
-    font-weight: 700;
-    transition: background-color 100ms ease;
-    font-family: "Allan";
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  width: 100vw;
+  background-color: #228be6;
+  color: white;
+  font-size: 3em;
+  font-weight: 700;
+  transition: background-color 100ms ease;
 
+  &:hover {
+    background-color: #1c7ed6;
+  }
+
+  .topbarText {
+    font-family: "Allan";
+    font-size: 1em;
     &:hover {
-      background-color: #1C7ED6;
+      cursor: pointer;
     }
+  }
 }
 
 .container {
@@ -161,7 +168,7 @@
 
     .right_bar {
       background-color: rgb(250, 250, 250);
-      
+
       .image {
         width: 80%;
         height: 100%;

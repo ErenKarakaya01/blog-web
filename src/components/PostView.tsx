@@ -3,20 +3,17 @@ import {
   Badge,
   Divider,
   Indicator,
-  Tooltip,
   TypographyStylesProvider,
   useMantineTheme,
 } from "@mantine/core"
 import homeStyles from "../sass/home.module.scss"
 import PostFormLayoutStyles from "../sass/postFormLayout.module.scss"
-import { useAppSelector } from "../redux/hooks"
 import { Text } from "@mantine/core"
 import "../sass/global.css"
 import CardsCarousel from "./Carousel"
 import Comments from "./Comments"
 import getRandomColor from "../utils/getRandomColor"
 import React, { Fragment } from "react"
-import PostSkeleton from "./skeletons/PostSkeleton"
 import formatTimestamp from "../utils/formatTimestamp"
 
 const PostView = ({
@@ -53,7 +50,7 @@ const PostView = ({
         }}
       >
         <Indicator
-          label={category}
+          label={category === "turkey" ? "Türkiye" : "Dünya"}
           color={getRandomColor()}
           inline
           size={16}

@@ -1,6 +1,5 @@
-import { Indicator, Skeleton, useMantineTheme, Text } from "@mantine/core"
+import { Skeleton } from "@mantine/core"
 import React from "react"
-import BlogPostCard from "../BlogPostCard"
 import blogPostCardStyles from "../../sass/blogPostCard.module.scss"
 
 const PostCardSkeleton = () => {

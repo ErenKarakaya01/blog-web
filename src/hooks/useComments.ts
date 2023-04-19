@@ -1,4 +1,4 @@
-import { getDocs, orderBy, query, where, limit, Timestamp } from "firebase/firestore"
+import { getDocs, orderBy, query, where, Timestamp } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { commentCollection } from "../firebase/firebase"
 

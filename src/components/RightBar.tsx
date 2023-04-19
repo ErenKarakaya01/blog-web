@@ -2,7 +2,6 @@ import { Card, Image, Text } from "@mantine/core"
 import homeStyles from "../sass/home.module.scss"
 import { Divider } from "@mui/material"
 import Recommended from "./Recommended"
-import RightBarSkeleton from './skeletons/RightBarSkeleton'
 
 const RightBar = ({
   imgUrl,

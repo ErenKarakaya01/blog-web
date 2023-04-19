@@ -1,9 +1,8 @@
-import { Button, Modal, TextInput, useMantineTheme } from "@mantine/core"
+import { Modal, TextInput, useMantineTheme } from "@mantine/core"
 import { useMediaQuery } from "@mui/material"
 import { IconSearch } from "@tabler/icons-react"
 import React, { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import SearchIcon from "@mui/icons-material/Search"
+import { useNavigate } from "react-router-dom"
 
 const SearchModal = ({
   opened,
