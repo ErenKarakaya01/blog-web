@@ -1,7 +1,8 @@
 import PostFormLayout from "../layouts/PostFormLayout"
 
 const AddPost = () => {
-  return <PostFormLayout />
+  /* return <PostFormLayout /> */
+  return <div>gsd</div>
 }
 
 export default AddPost
