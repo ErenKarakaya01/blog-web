@@ -1,12 +1,10 @@
 import Login from "./pages/login"
 import Register from "./pages/register"
 import { useRoutes } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { auth } from "./firebase/firebase"
 import { onAuthStateChanged } from "firebase/auth"
 import Home from "./pages/home"
-import Turkey from "./pages/search"
-import PostsLayout from "./layouts/PostsLayout"
 import AddPost from "./pages/addPost"
 import Post from "./pages/post"
 import UpdateRight from "./pages/updateRight"
@@ -17,7 +15,6 @@ import ProtectedLayout from "./layouts/ProtectedLayout"
 import { useAppDispatch } from "./redux/hooks"
 import { setUser } from "./redux/user/userSlice"
 import isAdmin from "./utils/isAdmin"
-import Search from './pages/search'
 
 interface Page {
   path: string

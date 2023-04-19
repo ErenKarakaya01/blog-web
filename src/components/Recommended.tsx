@@ -11,7 +11,7 @@ interface Post {
   tags: string[]
 }
 const Recommended = () => {
-  const { posts, loading }: { posts: Post[]; loading: boolean } = usePosts({
+  const { posts }: { posts: Post[] } = usePosts({
     num: 10,
   })
   const { id } = useParams<string>()
@@ -40,7 +40,7 @@ const Recommended = () => {
               >
                 {post.title}
               </Text>
-              
+
               <div className={homeStyles.recommended_post_tags}>
                 <Avatar.Group spacing="sm" mx={20}>
                   {post.tags.map((tag) => (
