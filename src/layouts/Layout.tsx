@@ -11,7 +11,7 @@ import { useAppSelector } from "../redux/hooks"
 const Layout = ({ children }: { children: ReactNode }) => {
   const { right, loading } = useRightBar()
   const { user } = useAppSelector((state) => state.user)
-  const [scrollPosition, onScrollPositionChange] = useState({ x: 0, y: 0 });
+  const [,onScrollPositionChange] = useState({ x: 0, y: 0 })
 
   return (
     <>
@@ -21,7 +21,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
           { link: "/category/world", label: "Dünya" },
         ]}
         user={user}
-        scrollPosition={scrollPosition}
       />
       <ScrollArea className={homeStyles.container} onScrollPositionChange={onScrollPositionChange}>
         <div className={homeStyles.content_outline}>

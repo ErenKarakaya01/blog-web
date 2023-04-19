@@ -139,22 +139,15 @@ interface HeaderMiddleProps {
       }
     | null
   links: { link: string; label: string }[]
-  scrollPosition: {
-    x: number
-    y: number
-  }
 }
 
-export default function HeaderMiddle({
-  user,
-  links,
-  scrollPosition,
-}: HeaderMiddleProps) {
+export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
   const [opened, { toggle }] = useDisclosure(false)
   const { classes, cx } = useStyles()
   const [userMenuOpened, setUserMenuOpened] = useState(false)
   const navigate = useNavigate()
   const [searchModalOpened, searchModal] = useDisclosure(false)
+  const [scrollPosition] = useState({ x: 0, y: 0 })
 
   const items = links.map((link) => (
     <NavLink
@@ -263,32 +256,30 @@ export default function HeaderMiddle({
               {!user && (
                 <>
                   <Menu.Label>Kullanıcı</Menu.Label>
-                  <Menu.Item icon={<LogoutIcon />}>
-                    <Link to="/login">Giriş Yap</Link>
-                  </Menu.Item>
+                  <Link to="/login">
+                    <Menu.Item icon={<LogoutIcon />}>Giriş Yap</Menu.Item>
+                  </Link>
                 </>
               )}
 
               {user && (
                 <>
                   <Menu.Label>Kullanıcı</Menu.Label>
-                  <Menu.Item icon={<LogoutIcon />}>
-                    <div
-                      onClick={() => {
-                        signOut(auth)
-                          .then(() => {
-                            // Sign-out successful.
-                            navigate("/login")
-                          })
-                          .catch((error) => {
-                            // An error happened.
-                            console.log(error)
-                          })
-                      }}
-                    >
-                      Çıkış Yap
-                    </div>
-                  </Menu.Item>
+                  <div
+                    onClick={() => {
+                      signOut(auth)
+                        .then(() => {
+                          // Sign-out successful.
+                          navigate("/login")
+                        })
+                        .catch((error) => {
+                          // An error happened.
+                          console.log(error)
+                        })
+                    }}
+                  >
+                    <Menu.Item icon={<LogoutIcon />}>Çıkış Yap</Menu.Item>
+                  </div>
                 </>
               )}
 
@@ -297,15 +288,17 @@ export default function HeaderMiddle({
                   <Menu.Divider />
                   <Menu.Label>Admin</Menu.Label>
 
-                  <Menu.Item icon={<IconCirclePlus />}>
-                    <Link to="/add-post">Yeni Yazı</Link>
-                  </Menu.Item>
-                  <Menu.Item icon={<IconClipboardText />}>
-                    <Link to="/admin-posts">Yazılar</Link>
-                  </Menu.Item>
-                  <Menu.Item icon={<IconLayoutSidebarRight />}>
-                    <Link to="/update-right">Sağ Menü</Link>
-                  </Menu.Item>
+                  <Link to="/add-post">
+                    <Menu.Item icon={<IconCirclePlus />}>Yeni Yazı</Menu.Item>
+                  </Link>
+                  <Link to="/admin-posts">
+                    <Menu.Item icon={<IconClipboardText />}>Yazılar</Menu.Item>
+                  </Link>
+                  <Link to="/update-right">
+                    <Menu.Item icon={<IconLayoutSidebarRight />}>
+                      Sağ Menü
+                    </Menu.Item>
+                  </Link>
                 </>
               )}
             </Menu.Dropdown>
