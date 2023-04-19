@@ -28,7 +28,7 @@ import {
 } from "@tabler/icons-react"
 import { IconButton } from "@mui/material"
 import SearchModal from "../components/SearchModal"
-import homeStyles from "../sass/home.module.scss"
+
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -147,7 +147,6 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
   const [userMenuOpened, setUserMenuOpened] = useState(false)
   const navigate = useNavigate()
   const [searchModalOpened, searchModal] = useDisclosure(false)
-  const [scrollPosition] = useState({ x: 0, y: 0 })
 
   const items = links.map((link) => (
     <NavLink
@@ -165,26 +164,6 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
 
   return (
     <>
-      <div
-        className={homeStyles.topbar}
-        style={{
-          display: scrollPosition.y > 56 ? "none" : "flex",
-        }}
-      >
-        <Link to="/">
-          <Text
-            variant="gradient"
-            gradient={{ from: "white", to: "white", deg: 45 }}
-            ta="center"
-            fz="xl"
-            fw={700}
-            className={homeStyles.topbarText}
-          >
-            ESEN BLOG
-          </Text>
-        </Link>
-      </div>
-
       <Header
         height={56}
         sx={{
@@ -192,6 +171,7 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
           boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
           backgroundColor: "rgba(255, 255, 255, 0.80)",
           backdropFilter: "blur(10px)",
+          zIndex: 1,
         }}
       >
         <Drawer

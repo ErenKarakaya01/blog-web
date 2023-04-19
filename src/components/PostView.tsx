@@ -14,6 +14,8 @@ import CardsCarousel from "./Carousel"
 import getRandomColor from "../utils/getRandomColor"
 import React, { Fragment } from "react"
 import formatTimestamp from "../utils/formatTimestamp"
+import Comments from "./Comments"
+import { useParams } from "react-router-dom"
 
 const PostView = ({
   title,
@@ -30,6 +32,8 @@ const PostView = ({
   content: string
   created: { seconds: number; nanoseconds: number }
 }) => {
+  const { id } = useParams()
+
   return (
     <div className={homeStyles.content}>
       <div className={homeStyles.carousel}>
@@ -46,6 +50,7 @@ const PostView = ({
           color: useMantineTheme().colors.gray[6],
           flexDirection: "column",
           textTransform: "capitalize",
+          marginTop: "1em",
         }}
       >
         <Indicator
@@ -116,6 +121,8 @@ const PostView = ({
       </div>
 
       <Divider className={homeStyles.divider} />
+
+      {id && <Comments />}
     </div>
   )
 }

@@ -19,7 +19,6 @@ const Post = () => {
       ) : (
         <>
           <PostView {...post} />
-          <Comments />
         </>
       )}
     </Layout>

@@ -16,11 +16,19 @@ const StyledTextEditorv2 = () => {
   const editorRef = useRef(null)
   const dispatch = useAppDispatch()
   const content = useAppSelector((state) => state.post.content)
+  const images = useAppSelector((state) => state.post.images)
   const { id } = useParams()
+  const [editor, setEditor] = useState<Quill | null>(null)
 
   useEffect(() => {
     if (url) {
       dispatch(addImage(url))
+
+      const range = editor?.getSelection(true)
+      editor?.pasteHTML(
+        range!.index + 1,
+        `<img src="${url}" >`
+      )
     }
   }, [url])
 
@@ -53,7 +61,7 @@ const StyledTextEditorv2 = () => {
               ["clean"],
             ],
             handlers: {
-              image: (value: boolean) => {
+              image: async (value: boolean) => {
                 const input = document.createElement("input")
                 input.setAttribute("type", "file")
                 input.setAttribute("accept", "image/*")
@@ -61,17 +69,8 @@ const StyledTextEditorv2 = () => {
 
                 input.onchange = async () => {
                   const file = input.files![0]
-                  console.log(file)
+
                   setFile(file)
-
-                  const formData = new FormData()
-                  formData.append("image", file)
-
-                  const range = editor.getSelection(true)
-                  editor.pasteHTML(
-                    range.index + 1,
-                    `<img src="https://picsum.photos/1900/1900" >`
-                  )
                 }
               },
             },
@@ -83,6 +82,8 @@ const StyledTextEditorv2 = () => {
           },
         },
       })
+
+      setEditor(editor)
 
       editor.on("text-change", () => {
         dispatch(setContent(editor.root.innerHTML))
