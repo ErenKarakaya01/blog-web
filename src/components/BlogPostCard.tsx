@@ -89,7 +89,7 @@ const BlogPostCard = ({
               className={blogPostCardStyles.card__btn}
               onClick={() => navigate(`/post/${id}`)}
             >
-              Daha fazla
+              Daha Fazla
             </button>
           </div>
         </div>

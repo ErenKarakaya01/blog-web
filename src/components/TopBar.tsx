@@ -5,7 +5,7 @@ import homeStyles from "../sass/home.module.scss"
 
 const TopBar = () => {
   return (
-    <div id="#topbar" className={homeStyles.topbar}>
+    <div className={homeStyles.topbar}>
       <Link to="/">
         <Text
           variant="gradient"

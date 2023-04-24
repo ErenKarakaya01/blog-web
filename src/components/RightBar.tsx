@@ -26,11 +26,11 @@ const RightBar = ({
 
         <Divider className={homeStyles.divider} />
 
-        <Text weight={500} size="lg" mt="md">
+        <Text weight={500} size="lg" mt="md" align="center">
           {title}
         </Text>
 
-        <Text mt="xs" color="dimmed" size="sm">
+        <Text mt="xs" color="dimmed" size="sm" align="center">
           {text}
         </Text>
       </Card>

@@ -68,7 +68,9 @@ const Comments = () => {
             <div className={commentsStyles.avatar}>
               <img
                 src={
-                  user ? user.photoURL : require("../assets/images/user.png")
+                  comment.author
+                    ? `https://ui-avatars.com/api/?name=${comment.author}&background=0D8ABC&color=fff`
+                    : require("../assets/images/user.png")
                 }
                 alt="Avatar"
               />

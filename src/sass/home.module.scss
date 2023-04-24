@@ -32,7 +32,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: calc(100vh - 112px);
   background-color: rgba(248, 248, 248, 0.818);
   scroll-margin-inline-start: 56px;
 

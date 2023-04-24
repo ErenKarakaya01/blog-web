@@ -1,13 +1,12 @@
-import React, { ReactNode, useEffect, useRef, useState } from "react"
+import React, { ReactNode } from "react"
 import Navbar from "../layouts/Navbar"
-import { ScrollArea, Text } from "@mantine/core"
+import { ScrollArea } from "@mantine/core"
 import homeStyles from "../sass/home.module.scss"
 import Footer from "./Footer"
 import RightBar from "../components/RightBar"
 import useRightBar from "../hooks/useRightBar"
 import RightBarSkeleton from "../components/skeletons/RightBarSkeleton"
 import { useAppSelector } from "../redux/hooks"
-import { Link } from "react-router-dom"
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const { right, loading } = useRightBar()

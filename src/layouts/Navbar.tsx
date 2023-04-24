@@ -28,8 +28,7 @@ import {
 } from "@tabler/icons-react"
 import { IconButton } from "@mui/material"
 import SearchModal from "../components/SearchModal"
-import TopBar from '../components/TopBar'
-
+import TopBar from "../components/TopBar"
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -169,11 +168,9 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
       <Header
         height={56}
         sx={{
-          position: "sticky",
           boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
           backgroundColor: "rgba(255, 255, 255, 0.80)",
           backdropFilter: "blur(10px)",
-          zIndex: 1,
         }}
       >
         <Drawer

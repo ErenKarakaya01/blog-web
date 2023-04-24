@@ -27,7 +27,7 @@ const LeftBar = () => {
 
   const scroll = () => {
     const section = document.querySelector("#comments")
-    section?.scrollIntoView({ behavior: "smooth", block: "start" })
+    section?.scrollIntoView({ behavior: "smooth" })
   }
 
   const toggleLike = async () => {
