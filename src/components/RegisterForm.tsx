@@ -26,14 +26,14 @@ const RegisterForm = () => {
     },
 
     validate: (values: FormValues) => ({
-      email: /^\S+@\S+$/.test(values.email) ? null : "Invalid email",
+      email: /^\S+@\S+$/.test(values.email) ? null : "Email formatı hatalı",
       password:
-        values.password.length <= 8
-          ? "Password Needs To Be At Least 8 Characters"
+        values.password.length < 8
+          ? "Şifre en az 8 karakter olmalıdır"
           : null,
       confirmPassword:
         values.password !== values.confirmPassword
-          ? "Passwords Did Not Match"
+          ? "Şifreler eşleşmiyor"
           : null,
     }),
   })
@@ -75,14 +75,14 @@ const RegisterForm = () => {
 
       <PasswordInput
         label="Password"
-        placeholder="Password"
+        placeholder="Şifre"
         {...form.getInputProps("password")}
       />
 
       <PasswordInput
         mt="sm"
         label="Confirm password"
-        placeholder="Confirm password"
+        placeholder="Şifreyi tekrar girin"
         {...form.getInputProps("confirmPassword")}
       />
 

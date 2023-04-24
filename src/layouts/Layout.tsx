@@ -12,24 +12,9 @@ import { Link } from "react-router-dom"
 const Layout = ({ children }: { children: ReactNode }) => {
   const { right, loading } = useRightBar()
   const { user } = useAppSelector((state) => state.user)
-  const scrollArea = useRef(null)
 
   return (
     <>
-      <div id="#topbar" className={homeStyles.topbar}>
-        <Link to="/">
-          <Text
-            variant="gradient"
-            gradient={{ from: "white", to: "white", deg: 45 }}
-            ta="center"
-            fz="xl"
-            fw={700}
-            className={homeStyles.topbarText}
-          >
-            ESEN BLOG
-          </Text>
-        </Link>
-      </div>
       <Navbar
         links={[
           { link: "/category/turkey", label: "Türkiye" },
@@ -37,7 +22,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         ]}
         user={user}
       />
-      <ScrollArea id="#scrollArea" className={homeStyles.container} ref={scrollArea}>
+      <ScrollArea className={homeStyles.container}>
         <div className={homeStyles.content_outline}>
           {children}
           {loading ? (

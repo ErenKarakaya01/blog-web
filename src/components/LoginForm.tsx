@@ -23,7 +23,7 @@ const LoginForm = () => {
     },
 
     validate: (values: FormValues) => ({
-      email: /^\S+@\S+$/.test(values.email) ? null : "Invalid email",
+      email: /^\S+@\S+$/.test(values.email) ? null : "Email formatı hatalı",
     }),
   })
 
@@ -61,8 +61,8 @@ const LoginForm = () => {
       />
 
       <PasswordInput
-        label="Password"
-        placeholder="Password"
+        label="Şifre"
+        placeholder="Şifre"
         {...form.getInputProps("password")}
       />
 

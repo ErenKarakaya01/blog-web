@@ -28,6 +28,7 @@ import {
 } from "@tabler/icons-react"
 import { IconButton } from "@mui/material"
 import SearchModal from "../components/SearchModal"
+import TopBar from '../components/TopBar'
 
 
 const useStyles = createStyles((theme) => ({
@@ -164,6 +165,7 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
 
   return (
     <>
+      <TopBar />
       <Header
         height={56}
         sx={{
