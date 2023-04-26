@@ -39,6 +39,15 @@
       }
     }
 
+    .google {
+      width: 80%;
+      height: 45px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
     .center {
       height: 100%;
       display: inline-flex;

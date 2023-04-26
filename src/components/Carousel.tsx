@@ -61,7 +61,11 @@ function Card({ id, image, title, category }: CardProps) {
     >
       <div>
         <Text className={classes.category} size="xs">
-          {category === "turkey" ? "Türkiye" : "Dünya"}
+          {category === "turkey"
+            ? "Türkiye"
+            : category === "world"
+            ? "Dünya"
+            : "Matematik"}
         </Text>
         <Title order={3} className={classes.title} lineClamp={3}>
           {title}

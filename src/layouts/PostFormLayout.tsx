@@ -77,6 +77,7 @@ const PostFormLayout = ({ id }: { id?: string }) => {
           data={[
             { value: "turkey", label: "Türkiye" },
             { value: "world", label: "Dünya" },
+            { value: "mathematics", label: "Matematik" },
           ]}
           description="Dünya, Türkiye"
           placeholder="Kategori seçiniz"
@@ -91,9 +92,9 @@ const PostFormLayout = ({ id }: { id?: string }) => {
         <TextInput
           value={place}
           onChange={(e) => dispatch(setPlace(e.target.value))}
-          label="Şehir, Bölge, İlçe vs."
-          placeholder="Yer giriniz"
-          description="Roma, Kapadokya, Kadıköy vs."
+          label="Konu"
+          placeholder="Konu giriniz"
+          description="Roma, Kapadokya, Türev vs."
           required
         />
 

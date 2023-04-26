@@ -54,7 +54,13 @@ const PostView = ({
         }}
       >
         <Indicator
-          label={category === "turkey" ? "Türkiye" : "Dünya"}
+          label={
+            category === "turkey"
+              ? "Türkiye"
+              : category === "world"
+              ? "Dünya"
+              : "Matematik"
+          }
           color={getRandomColor()}
           inline
           size={16}

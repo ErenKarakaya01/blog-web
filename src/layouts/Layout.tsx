@@ -18,6 +18,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         links={[
           { link: "/category/turkey", label: "Türkiye" },
           { link: "/category/world", label: "Dünya" },
+          { link: "/category/mathematics", label: "Matematik" },
         ]}
         user={user}
       />

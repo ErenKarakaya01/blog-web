@@ -13,7 +13,7 @@ const BlogPostCard = ({
   content,
   category,
   place,
-  image
+  image,
 }: {
   id: string
   created: {
@@ -33,18 +33,20 @@ const BlogPostCard = ({
   return (
     <>
       <Modal opened={opened} onClose={toggle} centered size="auto">
-        <img
-          className={blogPostCardStyles.modal__img}
-          src={image}
-          alt="img"
-        />
+        <img className={blogPostCardStyles.modal__img} src={image} alt="img" />
       </Modal>
 
       <div className={blogPostCardStyles.card}>
         <div className={blogPostCardStyles.card__img}>
           <div className={blogPostCardStyles.card__img__overlay}>
             <Indicator
-              label={category === "turkey" ? "Türkiye" : "Dünya"}
+              label={
+                category === "turkey"
+                  ? "Türkiye"
+                  : category === "world"
+                  ? "Dünya"
+                  : "Matematik"
+              }
               color={randomColor}
               inline
               size={20}
@@ -68,8 +70,10 @@ const BlogPostCard = ({
             size="sm"
             weight={500}
           >
-            <span style={{ color: "black", textTransform: "capitalize" }}>{place}</span>・
-            {formatTimestamp(created)} tarihinde yayınlandı
+            <span style={{ color: "black", textTransform: "capitalize" }}>
+              {place}
+            </span>
+            ・{formatTimestamp(created)} tarihinde yayınlandı
           </Text>
           <Text lineClamp={1} className={blogPostCardStyles.card__title}>
             {title}

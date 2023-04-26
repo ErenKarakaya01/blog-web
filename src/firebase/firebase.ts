@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { getAuth } from "firebase/auth"
+import { getAuth, GoogleAuthProvider } from "firebase/auth"
 import { collection, getFirestore } from "firebase/firestore"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -16,6 +16,7 @@ const app = initializeApp({
 
 // Initialize Firebase
 export const auth = getAuth(app)
+auth.languageCode = "tr"
 
 // Initialize Firestore
 export const db = getFirestore(app)
@@ -25,5 +26,9 @@ export const postCollection = collection(db, "posts")
 export const commentCollection = collection(db, "comments")
 export const likeCollection = collection(db, "likes")
 export const rightCollection = collection(db, "right")
+
+// google provider
+export const provider = new GoogleAuthProvider()
+provider.addScope("https://www.googleapis.com/auth/contacts.readonly")
 
 export default app

@@ -13,8 +13,7 @@ import {
   Drawer,
 } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
-import TwitterIcon from "@mui/icons-material/Twitter"
-import InstagramIcon from "@mui/icons-material/Instagram"
+import { IconBrandFacebook } from "@tabler/icons-react"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import LogoutIcon from "@mui/icons-material/Logout"
 import { Link, NavLink, useNavigate } from "react-router-dom"
@@ -171,6 +170,8 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
           boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
           backgroundColor: "rgba(255, 255, 255, 0.80)",
           backdropFilter: "blur(10px)",
+          zIndex: 10,
+          position: "relative",
         }}
       >
         <Drawer
@@ -292,7 +293,7 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
           </Group>
 
           <Group spacing={0} className={classes.social} position="right" noWrap>
-            <Link to="https://twitter.com/sprinkai0" target="_blank">
+            {/* <Link to="https://twitter.com/sprinkai0" target="_blank">
               <ActionIcon size="lg">
                 <TwitterIcon />
               </ActionIcon>
@@ -300,6 +301,11 @@ export default function HeaderMiddle({ user, links }: HeaderMiddleProps) {
             <Link to="https://www.instagram.com/sprinkai/" target="_blank">
               <ActionIcon size="lg">
                 <InstagramIcon />
+              </ActionIcon>
+            </Link> */}
+            <Link to="https://www.instagram.com/sprinkai/" target="_blank">
+              <ActionIcon size="lg">
+                <IconBrandFacebook />
               </ActionIcon>
             </Link>
           </Group>
