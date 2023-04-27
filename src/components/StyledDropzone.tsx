@@ -14,7 +14,7 @@ const StyledDropzone = ({ setImg }: { setImg: React.Dispatch<File> }) => {
       onReject={(files) => {
         showError("Resim yüklenemedi")
       }}
-      maxSize={3 * 1024 ** 2}
+      maxSize={20 * 1024 ** 2}
       accept={IMAGE_MIME_TYPE}
     >
       <Group

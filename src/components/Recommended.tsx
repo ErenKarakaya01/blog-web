@@ -19,7 +19,7 @@ const Recommended = () => {
   return (
     <Card shadow="sm" p={0} className={homeStyles.recommended}>
       <Card.Section className={homeStyles.recommended_title}>
-        Önerilen
+        ÖNERİLEN
       </Card.Section>
 
       <Card.Section className={homeStyles.recommended_posts}>
