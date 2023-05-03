@@ -1,6 +1,6 @@
-# SprinkaiBlog
+# Esen Blog
 
-SprinkaiBlog is a React-based web application built to showcase travel experiences and stories. This app utilizes Firebase for user authentication, Redux for state management, and various other technologies to bring together a seamless blogging experience. 
+Esen Blog is a React-based web application built to showcase travel experiences and stories. This app utilizes Firebase for user authentication, Redux for state management, and various other technologies to bring together a seamless blogging experience. 
 
 ## Getting Started
 
