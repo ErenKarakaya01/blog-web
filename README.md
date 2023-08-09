@@ -38,7 +38,7 @@ The app should now be running on http://localhost:3000.
 
 ### Deployment
 
-The app is not yet published, but you can find the demo on [https://sprinkaiblog.herokuapp.com](https://sprinkaiblog.herokuapp.com). The deployment process is not included in this readme, but there are many resources available online to help you deploy a React app.
+The app is not yet published, but you can find the demo on [https://sprinkaiblog.herokuapp.com](http://www.gezilerimiz.com/). The deployment process is not included in this readme, but there are many resources available online to help you deploy a React app.
 
 ## Technologies Used
 
